@@ -5,7 +5,7 @@ public class PlayerControl : MonoBehaviour
 {
 	[SerializeField] float MovementSpeed;
 
-	Vector2 movementVector = Vector2.zero;
+	public Vector2 movementVector = Vector2.zero;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
@@ -21,37 +21,37 @@ public class PlayerControl : MonoBehaviour
 
 	Vector2 GetMovementAndNormalize()
 	{
-		if (Input.GetKeyUp(KeyCode.W))
+		if (Input.GetKeyUp(KeyCode.W) && movementVector.y > 0)
 		{
 			movementVector.y -= 1;
 		}
-		if (Input.GetKeyUp(KeyCode.S))
+		if (Input.GetKeyUp(KeyCode.S) && movementVector.y < 0)
 		{
 			movementVector.y += 1;
 		}
-		if (Input.GetKeyUp(KeyCode.A))
+		if (Input.GetKeyUp(KeyCode.A) && movementVector.x < 0)
 		{
 			movementVector.x += 1;
 		}
-		if (Input.GetKeyUp(KeyCode.D))
+		if (Input.GetKeyUp(KeyCode.D) && movementVector.x > 0)
 		{
 			movementVector.x -= 1;
 		}
 
 
-		if (Input.GetKeyDown(KeyCode.W))
+		if (Input.GetKeyDown(KeyCode.W) && movementVector.y == 0)
 		{
 			movementVector.y += 1;
 		}
-		if (Input.GetKeyDown(KeyCode.S))
+		if (Input.GetKeyDown(KeyCode.S) && movementVector.y == 0)
 		{
 			movementVector.y -= 1;
 		}
-		if (Input.GetKeyDown(KeyCode.A))
+		if (Input.GetKeyDown(KeyCode.A) && movementVector.x == 0)
 		{
 			movementVector.x -= 1;
 		}
-		if (Input.GetKeyDown(KeyCode.D))
+		if (Input.GetKeyDown(KeyCode.D) && movementVector.x == 0)
 		{
 			movementVector.x += 1;
 		}
