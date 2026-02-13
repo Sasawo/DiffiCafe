@@ -7,10 +7,8 @@ public class CameraControl : MonoBehaviour
 	void Update()
 	{
         GameObject player = GameObject.FindWithTag("Player");
-
-        float x = (player.transform.position.x - gameObject.transform.position.x) / 2;
 		float y = (player.transform.position.y - gameObject.transform.position.y) / 2;
 
-		gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(x * TrackingSpeedX, y * TrackingSpeedY);
+		gameObject.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, y * TrackingSpeedY);
 	}
 }
