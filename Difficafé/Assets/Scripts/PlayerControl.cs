@@ -17,7 +17,6 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
 		gameObject.GetComponent<Rigidbody2D>().linearVelocity = GetMovementAndNormalize();
-
 	}
 
 	Vector2 GetMovementAndNormalize()
