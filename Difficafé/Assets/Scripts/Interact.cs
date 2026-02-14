@@ -4,8 +4,9 @@ using UnityEngine.Events;
 
 public class Interact : MonoBehaviour
 {
-    [SerializeField] UnityEvent onInteract;
+	[SerializeField] UnityEvent onInteract;
 	[SerializeField] UnityEvent onReturnInteract;
+	[SerializeField] bool InteractOnTouch;
 	bool active = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,23 +24,39 @@ public class Interact : MonoBehaviour
 			GameObject.Find("Player").GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
 			GameObject.Find("Player").GetComponent<PlayerControl>().movementVector = Vector2.zero;
 
-			onInteract?.Invoke();
+			RunInteract();
 
-			UnityEvent temp = onInteract;
-			onInteract = onReturnInteract;
-			onReturnInteract = temp;
-        }
+		}
     }
+
+	void RunInteract()
+	{
+		onInteract?.Invoke();
+
+		UnityEvent temp = onInteract;
+		onInteract = onReturnInteract;
+		onReturnInteract = temp;
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if (InteractOnTouch)
+		{
+			RunInteract();
+			return;
+		}
         gameObject.transform.Find("Interactable").GetComponent<SpriteRenderer>().enabled = true;
         active = true;
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
+		if (InteractOnTouch)
+		{
+			RunInteract();
+			return;
+		}
 		gameObject.transform.Find("Interactable").GetComponent<SpriteRenderer>().enabled = false;
-        active = false;
+		active = false;
 	}
 }
