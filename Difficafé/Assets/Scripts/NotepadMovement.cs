@@ -24,8 +24,8 @@ public class NotepadMovement : MonoBehaviour
 
 		if (moving && distanceMoved < MovementDistance)
 		{
-			gameObject.transform.position += new Vector3(0, movementDirection * MovementSpeed);
-			distanceMoved += MovementSpeed;
+			gameObject.transform.position += new Vector3(0, movementDirection * MovementSpeed * Time.deltaTime);
+			distanceMoved += MovementSpeed * Time.deltaTime;
 			notepadDistanceVector = gameObject.transform.position - GameObject.Find("Tray").transform.position;
 		}
 		else if (moving)

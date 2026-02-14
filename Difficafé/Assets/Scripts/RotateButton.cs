@@ -2,9 +2,8 @@ using UnityEngine;
 
 public class RotateButton : MonoBehaviour
 {
-    [SerializeField] bool DirectionLeft;
+    [SerializeField] bool DirectionRight;
     [SerializeField] float DegreeBound;
-    [SerializeField] bool ReturnAction;
     bool pressed;
     bool rotating;
     float startAngle;
@@ -28,19 +27,18 @@ public class RotateButton : MonoBehaviour
 				gameObject.transform.Rotate(0, 0, angle - startAngle - gameObject.transform.eulerAngles.z);
                 if (Mathf.Abs(angle - endAngle) < 5)
 				{
-					gameObject.transform.eulerAngles = new Vector3(0, 0, DirectionLeft ? -DegreeBound : DegreeBound);
-					print("correct");
+					gameObject.transform.eulerAngles = new Vector3(0, 0, DirectionRight ? -DegreeBound : DegreeBound);
 					rotating = false;
+                    DirectionRight = !DirectionRight;
 				}
 			} else
             {
                 SetupAngles();
 			}
-        } else if (!pressed && Mathf.Abs(gameObject.transform.eulerAngles.z - startAngle) > 2 && ReturnAction)
+        } else if (!pressed && rotating)
 		{
-            /*gameObject.transform.Rotate(0, 0, (gameObject.transform.eulerAngles.z - startAngle) / 3);
-			if (gameObject.transform.eulerAngles.z > startAngle - 1 && gameObject.transform.eulerAngles.z < startAngle + 1)
-				gameObject.transform.eulerAngles = new Vector3(0, 0, startAngle);*/
+            gameObject.transform.rotation = Quaternion.identity;
+            rotating = false;
 		}
 
 	}
@@ -48,7 +46,7 @@ public class RotateButton : MonoBehaviour
     float GetAngle(Vector2 pos1, Vector2 pos2)
     {
 		Vector2 dir = pos1 - pos2;
-		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 180f;
 
 		if (angle < 0)
 			angle += 360f;
@@ -59,7 +57,7 @@ public class RotateButton : MonoBehaviour
     void SetupAngles()
     {
 		startAngle = GetAngle(gameObject.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-		endAngle = DirectionLeft ? startAngle - DegreeBound : startAngle + DegreeBound;
+		endAngle = DirectionRight ? startAngle - DegreeBound : startAngle + DegreeBound;
 		while (endAngle < 0) endAngle += 360;
 		while (endAngle >= 360) endAngle -= 360;
 	}
@@ -73,11 +71,11 @@ public class RotateButton : MonoBehaviour
 
     bool IsInRange(float angle)
     {
-        if (DirectionLeft)
-            return angle >= startAngle && angle <= endAngle;
+        if (DirectionRight)
+            return startAngle > endAngle ? (angle <= startAngle && angle >= endAngle) : (angle <= startAngle || angle >= endAngle);
         else
-            return angle <= startAngle || angle >= endAngle;
-    }
+            return startAngle > endAngle ? (angle >= startAngle || angle <= endAngle) : (angle <= startAngle && angle >= endAngle);
+	}
 
 	private void OnMouseUp()
     {

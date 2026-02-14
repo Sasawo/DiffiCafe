@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Draggable : MonoBehaviour
 {
-    [NonSerialized] public Vector3 DefaultPosition;
+	float DeltaTimeCompensation = 400;
+	[NonSerialized] public Vector3 DefaultPosition;
 	[NonSerialized] public Vector3 FirstPosition;
 	[SerializeField] float TrackingSpeed;
 	[SerializeField] float SpeedDampening;
@@ -49,6 +50,6 @@ public class Draggable : MonoBehaviour
 		gameObject.GetComponent<Rigidbody2D>().linearVelocity *= SpeedDampening;
 
 		gameObject.GetComponent<Rigidbody2D>().linearVelocity += 
-			new Vector2((finalPos.x - gameObject.transform.position.x) * TrackingSpeed, (finalPos.y - gameObject.transform.position.y) * TrackingSpeed) * AdditionalDampening;
+			new Vector2((finalPos.x - gameObject.transform.position.x) * TrackingSpeed, (finalPos.y - gameObject.transform.position.y) * TrackingSpeed) * AdditionalDampening * Time.deltaTime * DeltaTimeCompensation;
 	}
 }

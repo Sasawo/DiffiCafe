@@ -61,8 +61,8 @@ public class Inventory : MonoBehaviour
 	{
 		if (moving && distanceMoved < movementDistance)
 		{
-			gameObject.transform.position += new Vector3(movementDirection * movementSpeed, 0);
-			distanceMoved += movementSpeed;
+			gameObject.transform.position += new Vector3(movementDirection * movementSpeed * Time.deltaTime, 0);
+			distanceMoved += movementSpeed * Time.deltaTime;
 			cameraDistanceVector = gameObject.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
 		}
 		else if (moving)

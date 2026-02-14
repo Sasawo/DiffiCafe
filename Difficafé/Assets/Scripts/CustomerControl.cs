@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CustomerControl : MonoBehaviour
 {
+	float DeltaTimeCompensation = 400;
     [NonSerialized] public CustomerData customer;
 	[SerializeField] float TrackingSpeed;
 	[SerializeField] float SpeedDampening;
@@ -49,7 +50,7 @@ public class CustomerControl : MonoBehaviour
 		gameObject.GetComponent<Rigidbody2D>().linearVelocity *= SpeedDampening;
 
 		gameObject.GetComponent<Rigidbody2D>().linearVelocity +=
-			new Vector2((finalPos.x - gameObject.transform.position.x) * TrackingSpeed, (finalPos.y - gameObject.transform.position.y) * TrackingSpeed) * AdditionalDampening;
+			new Vector2((finalPos.x - gameObject.transform.position.x) * TrackingSpeed, (finalPos.y - gameObject.transform.position.y) * TrackingSpeed) * AdditionalDampening * Time.deltaTime * DeltaTimeCompensation;
 	}
 
     void MoveToIndex(int index, int increment)
