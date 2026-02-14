@@ -7,6 +7,7 @@ public class Interact : MonoBehaviour
 	[SerializeField] UnityEvent onInteract;
 	[SerializeField] UnityEvent onReturnInteract;
 	[SerializeField] bool InteractOnTouch;
+	[SerializeField] bool InventoryRight;
 	bool active = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,6 +32,8 @@ public class Interact : MonoBehaviour
 
 	void RunInteract()
 	{
+		if (InventoryRight != GameObject.Find("Tray").GetComponent<Inventory>().isRight) GameObject.Find("Tray").GetComponent<Inventory>().SwitchSide();
+
 		onInteract?.Invoke();
 
 		UnityEvent temp = onInteract;

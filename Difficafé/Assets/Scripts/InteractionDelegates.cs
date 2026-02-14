@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class InteractionDelegates : MonoBehaviour
 {
-    public void GoToCoffeeMachine()
-    {
-        GameObject.Find("CoffeeCamera").GetComponent<Camera>().enabled = true;
+	[SerializeField] GameObject cupPreset;
+	public void GoToCoffeeMachine()
+	{
+		GameObject.Find("CoffeeCamera").GetComponent<Camera>().enabled = true;
 		GameObject.Find("MainCamera").GetComponent<Camera>().enabled = false;
 
 		GameObject.Find("CoffeeCamera").tag = "MainCamera";
@@ -40,6 +41,10 @@ public class InteractionDelegates : MonoBehaviour
 
 	public void MoveTray()
 	{
+		if (GameObject.Find("Tray").GetComponent<Inventory>().moving)
+		{
+			GameObject.Find("Tray").GetComponent<Inventory>().FlipDirection();
+		}
 		GameObject.Find("Tray").GetComponent<Inventory>().moving = true;
 	}
 }
