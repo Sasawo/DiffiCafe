@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 26cae8c314efc814993bc005fc7e1a39
+guid: b787f3b61744dd048b8d09483af2cd66
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6051573115826420967
-    second: 2_table_number_0
+      213: 8816895449059423524
+    second: Sugar_notebook_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2_table_number_0
+      name: Sugar_notebook_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 5
-        height: 5
+        x: 1
+        y: 1
+        width: 10
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 913ccd2505e740ca0800000000000000
-      internalID: -6051573115826420967
+      spriteID: 425f1fe62b7eb5a70800000000000000
+      internalID: 8816895449059423524
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      2_table_number_0: -6051573115826420967
+      Sugar_notebook_0: 8816895449059423524
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
