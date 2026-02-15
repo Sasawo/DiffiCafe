@@ -3497,18 +3497,18 @@ MonoBehaviour:
   - {fileID: 1813736988}
   OrderExtraCupItemSprites:
   - sprites:
-    - {fileID: 1757843261871060745, guid: 96d3d531c2d734b4eadf7cf81f2b9f91, type: 3}
-    - {fileID: 1757843261871060745, guid: 96d3d531c2d734b4eadf7cf81f2b9f91, type: 3}
+    - {fileID: -7162068937600557228, guid: 02c709d1776874249b94660da0709936, type: 3}
+    - {fileID: 5900485007638861386, guid: 75913721f24d31747a01f97bb056194d, type: 3}
     - {fileID: 1757843261871060745, guid: 96d3d531c2d734b4eadf7cf81f2b9f91, type: 3}
     - {fileID: 1289169291386548802, guid: 372f2e40bcadd8e47bd0b2e52e883da4, type: 3}
   - sprites:
-    - {fileID: 8585133868201328552, guid: 8eef87e3b70d6f7428738341826b552f, type: 3}
-    - {fileID: 8585133868201328552, guid: 8eef87e3b70d6f7428738341826b552f, type: 3}
+    - {fileID: -8743958704583296358, guid: 1832d9dacf142da408a88f8716533b78, type: 3}
+    - {fileID: -3297180252720499114, guid: d5d544f316d18fe488abae50bcc16b1e, type: 3}
     - {fileID: 8585133868201328552, guid: 8eef87e3b70d6f7428738341826b552f, type: 3}
     - {fileID: -3998113931907184161, guid: e492db09c3d92934ab3c5765d4d72adb, type: 3}
   - sprites:
-    - {fileID: 3566461941323832170, guid: 2bc1aaca688ad6345b6d677761d62d10, type: 3}
-    - {fileID: 3566461941323832170, guid: 2bc1aaca688ad6345b6d677761d62d10, type: 3}
+    - {fileID: -3424308300955375631, guid: 83bd130157dab2b4c810dc3bc4dfb54f, type: 3}
+    - {fileID: 3337819624654757027, guid: 29393994fbf103d4f9df520b4a5aa8c1, type: 3}
     - {fileID: 3566461941323832170, guid: 2bc1aaca688ad6345b6d677761d62d10, type: 3}
     - {fileID: 5672945072720340831, guid: b6a04fa45c067c3468fe079d65aa166b, type: 3}
   OrderExtraCupItems:
@@ -4899,9 +4899,10 @@ GameObject:
   - component: {fileID: 1763203044}
   - component: {fileID: 1763203047}
   - component: {fileID: 1763203048}
+  - component: {fileID: 1763203049}
   m_Layer: 3
   m_Name: Cup
-  m_TagString: Draggable
+  m_TagString: DraggableCup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5068,6 +5069,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1763203049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763203041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea78ee321eb546143b0c888a224aee4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  CupSize: 0
 --- !u!1001 &1782313555
 PrefabInstance:
   m_ObjectHideFlags: 0

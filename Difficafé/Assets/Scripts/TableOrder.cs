@@ -72,17 +72,6 @@ public class TableOrder : MonoBehaviour
 {
     [SerializeField] List<CustomerData> CustomerSpots;
     [SerializeField] int TableId;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public CustomerData? GetCustomerSpot()
     {

@@ -129,12 +129,12 @@ TextureImporter:
       name: Straw_big_cup_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 8
-        width: 12
-        height: 18
+        x: 0
+        y: 0
+        width: 20
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: afc3ef46494fadc478f814bd7ea843a2
     internalID: 0
     vertices: []
     indices: 

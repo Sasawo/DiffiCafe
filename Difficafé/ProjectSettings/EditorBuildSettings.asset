@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MenuScene/MenuScene.unity
+    guid: 92a6995395394bd4299a1dc35aa65479
+  - enabled: 1
+    path: Assets/Scenes/DayScene/DayScene.unity
+    guid: 3d848f91a40349b49b8a9e4ea30cbd16
+  - enabled: 1
     path: Assets/Scenes/GameScene/GameScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/EveningScene/EveScene.unity
+    guid: e2ab0fd9a2f9ef647826a83e46c1b205
+  - enabled: 1
+    path: Assets/Scenes/VictoryScene/VictoryScene.unity
+    guid: 1341e84de11267b4a9140c3681710696
+  - enabled: 1
+    path: Assets/Scenes/LoreScene/LoreScene.unity
+    guid: 214ff680c6af07f4abd9dd56a7de0818
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 289bdbf7b1c48894f82111caddbfbdf6, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
