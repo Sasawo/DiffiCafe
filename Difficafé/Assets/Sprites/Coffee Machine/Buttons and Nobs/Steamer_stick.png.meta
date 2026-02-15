@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fc0e1f87583cffb44be7a28b0ca3e5cc
+guid: a3934e4af45c8604a89a03fcdcde0d59
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3574647989191009726
-    second: Milk_full_milk_jug_0
+      213: -6969792886352340708
+    second: Steamer_stick_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 10
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Milk_full_milk_jug_0
+      name: Steamer_stick_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 15
-        height: 14
+        width: 9
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24a9437d79c446ec0800000000000000
-      internalID: -3574647989191009726
+      spriteID: c199ce22c42564f90800000000000000
+      internalID: -6969792886352340708
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Milk_full_milk_jug_0: -3574647989191009726
+      Steamer_stick_0: -6969792886352340708
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
