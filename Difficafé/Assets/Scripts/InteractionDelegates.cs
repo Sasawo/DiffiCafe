@@ -1,8 +1,10 @@
+using System.Linq;
 using UnityEngine;
 
 public class InteractionDelegates : MonoBehaviour
 {
 	[SerializeField] GameObject cupPreset;
+	[SerializeField] Sprite FullSpoon;
 	public void GoToCoffeeMachine(GameObject self)
 	{
 		GameObject.Find("CoffeeCamera").GetComponent<Camera>().enabled = true;
@@ -60,5 +62,30 @@ public class InteractionDelegates : MonoBehaviour
 			orders[i].OrderTaken = true;
 		}
 		notepad.DisplayOrder();
+	}
+
+	public void SpoonIntoMachine(GameObject spoon, GameObject spoonIn)
+	{
+		spoon.GetComponent<SpriteRenderer>().enabled = false;
+		spoonIn.GetComponent<SpriteRenderer>().enabled = true;
+	}
+
+	public void SpoonOutOfMachine(GameObject spoon, GameObject spoonIn)
+	{
+		spoon.GetComponent<SpriteRenderer>().enabled = true;
+		spoonIn.GetComponent<SpriteRenderer>().enabled = false;
+	}
+	public void CoffeeGrind(GameObject o)
+	{
+		StaticInventory inventory = o.GetComponent<StaticInventory>();
+
+		for (int i = 0; i < inventory.inventoryItems.Length; ++i)
+		{
+			if (inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite.name == "Coffee_spoon_empty_0" && CoffeeMachineManager.Instance.GrinderUses > 0)
+			{
+				inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite = FullSpoon;
+				CoffeeMachineManager.Instance.GrinderUses -= 1;
+			}
+		}
 	}
 }

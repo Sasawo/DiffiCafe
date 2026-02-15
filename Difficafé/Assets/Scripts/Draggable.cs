@@ -11,17 +11,26 @@ public class Draggable : MonoBehaviour
 	[SerializeField] float TrackingSpeed;
 	[SerializeField] float SpeedDampening;
 	[SerializeField] float AdditionalDampening;
+	[SerializeField] bool StoreInitialPosition;
+	[SerializeField] bool DestroyOnReturn;
+	[SerializeField] int DefaultRenderLayer;
+	[NonSerialized] public StaticInventory currentInventory = new StaticInventory();
 	bool returning;
 	[NonSerialized] public bool dragging;
 	void Start()
     {
 		returning = false;
+		GetComponent<SpriteRenderer>().sortingOrder = DefaultRenderLayer;
+		if (StoreInitialPosition)
+		{
+			DefaultPosition = gameObject.transform.position;
+			FirstPosition = gameObject.transform.position;
+		}
     }
 
     // Update is called once per frame
     void Update()
     {
-		print(dragging);
 		if (!dragging) return;
 
 		if (Vector2.Distance(gameObject.transform.position, DefaultPosition) < 0.5 && returning)
@@ -30,8 +39,10 @@ public class Draggable : MonoBehaviour
 			dragging = false;
 			GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = true;
 
-			if (DefaultPosition == FirstPosition)
+			if (DefaultPosition == FirstPosition && DestroyOnReturn)
 				Destroy(gameObject);
+
+			currentInventory.ObjectPutDown(gameObject);
 
 			gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 			gameObject.transform.position = DefaultPosition;
@@ -60,6 +71,8 @@ public class Draggable : MonoBehaviour
 	private void OnMouseDown()
 	{
 		GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = false;
+		GetComponent<SpriteRenderer>().sortingOrder = DefaultRenderLayer;
+		currentInventory.ObjectPickedUp(gameObject);
 		dragging = true;
 	}
 }

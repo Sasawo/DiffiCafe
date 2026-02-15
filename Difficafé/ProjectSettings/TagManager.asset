@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Draggable
   - DraggableCup
+  - DraggableSpoon
+  - DraggablePresser
+  - DraggableBag
+  - DraggableJug
+  - DraggableMilk
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public class Inventory : MonoBehaviour
 
 	[SerializeField] float movementSpeed;
 	[SerializeField] float movementDistance;
+	[SerializeField] List<string> AllowedTags;
+	[SerializeField] int RenderLayer;
 
 	[NonSerialized][NonReorderable] public GameObject[] inventoryItems = { null, null, null, null };
 	[NonReorderable] public GameObject[] inventorySlots;
@@ -83,20 +85,19 @@ public class Inventory : MonoBehaviour
 	}
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("DraggableCup"))
+		if (AllowedTags.Contains(collision.gameObject.tag))
 		{
 			collision.gameObject.GetComponent<Draggable>().DefaultPosition = FindClosestFreeSlot(collision.gameObject);
+			collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = RenderLayer;
 		}
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("DraggableCup"))
+		if (AllowedTags.Contains(collision.gameObject.tag))
 		{
 			int itemIndex = Array.IndexOf(inventoryItems, collision.gameObject);
 			if (itemIndex >= 0)
 				inventoryItems[itemIndex] = null;
-
-			collision.gameObject.GetComponent<Draggable>().DefaultPosition = collision.gameObject.GetComponent<Draggable>().FirstPosition;
 		}
 	}
 

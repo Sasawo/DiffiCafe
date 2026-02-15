@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
@@ -9,6 +11,12 @@ public class StaticInventory : MonoBehaviour
 {
 	[NonReorderable] public GameObject[] inventorySlots;
 	[NonSerialized][NonReorderable] public GameObject[] inventoryItems;
+	[SerializeField] List<string> AllowedTags;
+	[SerializeField] int RenderLayer;
+	[SerializeField] GameObject affected;
+	[SerializeField] UnityEvent<GameObject, GameObject> OnPutDown;
+	[SerializeField] UnityEvent<GameObject, GameObject> OnPickUp;
+	[SerializeField] UnityEvent<GameObject> OnExtraAction;
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Start()
     {
@@ -18,20 +26,19 @@ public class StaticInventory : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("Draggable"))
+		if (AllowedTags.Contains(collision.gameObject.tag))
 		{
 			collision.gameObject.GetComponent<Draggable>().DefaultPosition = FindClosestFreeSlot(collision.gameObject);
+			collision.gameObject.GetComponent<SpriteRenderer>().sortingOrder = RenderLayer;
 		}
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("Draggable"))
+		if (AllowedTags.Contains(collision.gameObject.tag))
 		{
 			int itemIndex = Array.IndexOf(inventoryItems, collision.gameObject);
 			if (itemIndex >= 0)
 				inventoryItems[itemIndex] = null;
-
-			collision.gameObject.GetComponent<Draggable>().DefaultPosition = collision.gameObject.GetComponent<Draggable>().FirstPosition;
 		}
 	}
 
@@ -58,7 +65,20 @@ public class StaticInventory : MonoBehaviour
 		else
 		{
 			inventoryItems[index] = item;
+			item.GetComponent<Draggable>().currentInventory = gameObject.GetComponent<StaticInventory>();
 			return inventorySlots[index].transform.position;
 		}
+	}
+	public void ObjectPutDown(GameObject o)
+	{
+		OnPutDown?.Invoke(o, affected);
+	}
+	public void ObjectPickedUp(GameObject o)
+	{
+		OnPickUp?.Invoke(o, affected);
+	}
+	public void ExtraAction()
+	{
+		OnExtraAction?.Invoke(gameObject);
 	}
 }

@@ -4,6 +4,7 @@ public class PullButton : MonoBehaviour
 {
     [SerializeField] float PullDistance;
     [SerializeField] float ReturnSpeed;
+    [SerializeField] StaticInventory inventory;
     float DefaultHeight;
     bool pressed;
     bool pulling;
@@ -27,6 +28,7 @@ public class PullButton : MonoBehaviour
 			} else if (gameObject.transform.position.y < DefaultHeight - PullDistance)
             {
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, DefaultHeight - PullDistance);
+                inventory.ExtraAction();
                 pulling = false;
 			}
         } else if (!pressed)
