@@ -44,7 +44,9 @@ public class InteractionDelegates : MonoBehaviour
 		if (GameObject.Find("Tray").GetComponent<Inventory>().moving)
 		{
 			GameObject.Find("Tray").GetComponent<Inventory>().FlipDirection();
+		} else
+		{
+			GameObject.Find("Tray").GetComponent<Inventory>().moving = true;
 		}
-		GameObject.Find("Tray").GetComponent<Inventory>().moving = true;
 	}
 }

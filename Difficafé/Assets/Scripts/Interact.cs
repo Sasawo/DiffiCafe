@@ -26,7 +26,6 @@ public class Interact : MonoBehaviour
 			GameObject.Find("Player").GetComponent<PlayerControl>().movementVector = Vector2.zero;
 
 			RunInteract();
-
 		}
     }
 

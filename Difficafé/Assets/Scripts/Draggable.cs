@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Draggable : MonoBehaviour
@@ -20,15 +21,17 @@ public class Draggable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		print(dragging);
 		if (!dragging) return;
 
-		if (Vector3.Distance(gameObject.transform.position, DefaultPosition) < 0.5 && returning)
+		if (Vector2.Distance(gameObject.transform.position, DefaultPosition) < 0.5 && returning)
 		{
+			returning = false;
+			dragging = false;
+
 			if (DefaultPosition == FirstPosition)
 				Destroy(gameObject);
 
-			returning = false;
-			dragging = false;
 			gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 			gameObject.transform.position = DefaultPosition;
 			return;
@@ -51,5 +54,10 @@ public class Draggable : MonoBehaviour
 
 		gameObject.GetComponent<Rigidbody2D>().linearVelocity += 
 			new Vector2((finalPos.x - gameObject.transform.position.x) * TrackingSpeed, (finalPos.y - gameObject.transform.position.y) * TrackingSpeed) * AdditionalDampening * Time.deltaTime * DeltaTimeCompensation;
+	}
+
+	private void OnMouseDown()
+	{
+		dragging = true;
 	}
 }

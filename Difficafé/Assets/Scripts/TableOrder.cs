@@ -11,6 +11,21 @@ public class CustomerOrder
     public int CupSize;
     public CoffeeLayers[] Layers;
     public List<Extras> ExtraItems;
+
+    public bool CompareOrders(Order other)
+    {
+        if (CupSize != other.CupSize) return false;
+
+        if (Layers.Length != other.Layers.Length) return false;
+        for (int i = 0; i < Layers.Length; ++i)
+            if (Layers[i] != other.Layers[i]) return false;
+
+        if (ExtraItems.Count != other.ExtraItems.Count) return false;
+        foreach (Extras e in ExtraItems)
+            if (!other.ExtraItems.Contains(e)) return false;
+
+        return true;
+    }
 }
 
 public class Order
@@ -53,6 +68,7 @@ public class CustomerData
 public class TableOrder : MonoBehaviour
 {
     [SerializeField] List<CustomerData> CustomerPaths;
+    [SerializeField] int TableId;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

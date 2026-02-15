@@ -29,7 +29,8 @@ public class Inventory : MonoBehaviour
 		inventorySlotOffsets = new Vector3[inventorySlots.Length];
 		for (int i = 0; i < inventorySlots.Length; ++i)
 		{
-			inventorySlotOffsets[i] = inventorySlots[i].transform.position - gameObject.transform.position;
+			inventorySlotOffsets[i] = new Vector3(inventorySlots[i].transform.position.x - gameObject.transform.position.x,
+				inventorySlots[i].transform.position.y - gameObject.transform.position.y);
 		}
 
 		gameObject.transform.position += new Vector3(movementDistance, 0);
@@ -39,7 +40,7 @@ public class Inventory : MonoBehaviour
 	}
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
 		gameObject.transform.position = GameObject.FindWithTag("MainCamera").transform.position + cameraDistanceVector;
 
@@ -61,8 +62,8 @@ public class Inventory : MonoBehaviour
 	{
 		if (moving && distanceMoved < movementDistance)
 		{
-			gameObject.transform.position += new Vector3(movementDirection * movementSpeed * Time.deltaTime, 0);
-			distanceMoved += movementSpeed * Time.deltaTime;
+			gameObject.transform.position += new Vector3(movementDirection * movementSpeed, 0);
+			distanceMoved += movementSpeed;
 			cameraDistanceVector = gameObject.transform.position - GameObject.FindWithTag("MainCamera").transform.position;
 		}
 		else if (moving)
@@ -111,7 +112,7 @@ public class Inventory : MonoBehaviour
 		float minDistance = -1;
 		for (int i = 0; i < inventoryItems.Length; ++i)
 		{
-			float distance = Vector3.Distance(item.transform.position, inventorySlots[i].transform.position);
+			float distance = Vector2.Distance(item.transform.position, inventorySlots[i].transform.position);
 			if (inventoryItems[i] is null && (distance < minDistance || minDistance < 0))
 			{
 				index = i;

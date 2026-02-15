@@ -8,6 +8,8 @@ public class NotepadMovement : MonoBehaviour
 	[NonSerialized] public bool moving;
     [SerializeField] float MovementDistance;
     [SerializeField] float MovementSpeed;
+	[SerializeField] GameObject Up;
+	[SerializeField] GameObject Down;
 	int movementDirection = 1;
 	float distanceMoved = 0;
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,12 +50,16 @@ public class NotepadMovement : MonoBehaviour
 	}
 	private void OnMouseEnter()
 	{
+		if (Up.GetComponent<NotepadPager>().Contained() || Down.GetComponent<NotepadPager>().Contained()) return;
+
 		if (moving) FlipDirection();
 		moving = true;
 	}
 
 	private void OnMouseExit()
 	{
+		if (Up.GetComponent<NotepadPager>().Check() || Down.GetComponent<NotepadPager>().Check()) return;
+
 		if (moving) FlipDirection();
 		moving = true;
 	}
