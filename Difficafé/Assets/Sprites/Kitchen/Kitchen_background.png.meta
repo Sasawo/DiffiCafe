@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fc0e1f87583cffb44be7a28b0ca3e5cc
+guid: 18e1dd42ef6f3014c92a45e83f8008e8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3574647989191009726
-    second: Milk_full_milk_jug_0
+      213: -133061269661634611
+    second: Kitchen_background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Milk_full_milk_jug_0
+      name: Kitchen_background_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 15
-        height: 14
+        width: 160
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 24a9437d79c446ec0800000000000000
-      internalID: -3574647989191009726
+      spriteID: dcfa470fa75472ef0800000000000000
+      internalID: -133061269661634611
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Milk_full_milk_jug_0: -3574647989191009726
+      Kitchen_background_0: -133061269661634611
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
