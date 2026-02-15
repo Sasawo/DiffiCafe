@@ -7,8 +7,9 @@ using static CustomerOrder;
 public class CustomerOrder
 {
 	public enum CoffeeLayers { COFFEE, MILK, W_MILK }
-	public enum Extras { STRAW, CREAM, SUGAR, TBD }
-    public int CupSize;
+	public enum Extras { STRAW, CREAM, SUGAR, CINNAMON }
+	public int OrderId;
+	public int CupSize;
     public CoffeeLayers[] Layers;
     public List<Extras> ExtraItems;
 
@@ -43,13 +44,15 @@ public class CustomerData
     public bool IsOccupied;
     public bool OrderTaken;
     public bool OrderDelivered;
+    int cutomersIds = 0;
 
-    public void GenerateOrder()
+    public void GenerateOrder(int id)
     {
         System.Random rng = new();
         Order = new CustomerOrder();
+        Order.OrderId = id * 100 + cutomersIds++;
         Order.CupSize = rng.Next(0, 2);
-        Order.Layers = new CoffeeLayers[Order.CupSize];
+        Order.Layers = new CoffeeLayers[Order.CupSize + 1];
         Order.ExtraItems = new();
         
         for (int i = 0; i < Order.Layers.Length; ++i)
@@ -67,7 +70,7 @@ public class CustomerData
 
 public class TableOrder : MonoBehaviour
 {
-    [SerializeField] List<CustomerData> CustomerPaths;
+    [SerializeField] List<CustomerData> CustomerSpots;
     [SerializeField] int TableId;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -83,18 +86,20 @@ public class TableOrder : MonoBehaviour
 
     public CustomerData? GetCustomerSpot()
     {
-        CustomerPaths.Shuffle();
+		CustomerSpots.Shuffle();
 
-        for (int i = 0; i < CustomerPaths.Count; ++i)
+        for (int i = 0; i < CustomerSpots.Count; ++i)
         {
-            if (!CustomerPaths[i].IsOccupied)
+            if (!CustomerSpots[i].IsOccupied)
             {
-                CustomerPaths[i].IsOccupied = true;
-                CustomerPaths[i].GenerateOrder();
-                return CustomerPaths[i];
+				CustomerSpots[i].IsOccupied = true;
+				CustomerSpots[i].GenerateOrder(TableId);
+                return CustomerSpots[i];
             }
         }
 
         return null;
     }
+
+    public List<CustomerData> GetTableOrder() => CustomerSpots;
 }

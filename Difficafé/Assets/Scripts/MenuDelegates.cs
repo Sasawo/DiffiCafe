@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class MenuDelegates : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void PlayButton()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+	public void ContinueButton()
+	{
+
+	}
+
+	public void ExitButton()
     {
-        
-    }
+		Application.Quit();
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false; // stops play mode in editor
+#endif
+	}
 }

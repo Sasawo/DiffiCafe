@@ -22,7 +22,6 @@ public class CustomerManager : MonoBehaviour
 
         if (timer >= CustomerSpawnTimer + rng.NextDouble() * CustomerSpawnOffset)
         {
-            print("SPAWNING");
 			CustomerData? customer = null;
 
 			timer = 0;

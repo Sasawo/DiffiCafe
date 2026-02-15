@@ -28,6 +28,7 @@ public class Draggable : MonoBehaviour
 		{
 			returning = false;
 			dragging = false;
+			GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = true;
 
 			if (DefaultPosition == FirstPosition)
 				Destroy(gameObject);
@@ -58,6 +59,7 @@ public class Draggable : MonoBehaviour
 
 	private void OnMouseDown()
 	{
+		GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = false;
 		dragging = true;
 	}
 }

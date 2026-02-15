@@ -11,5 +11,6 @@ public class Spawner : MonoBehaviour
 		spawned.GetComponent<Draggable>().DefaultPosition = spawned.transform.position;
 		spawned.GetComponent<Draggable>().FirstPosition = spawned.transform.position;
 		spawned.GetComponent<Draggable>().dragging = true;
+		GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = false;
 	}
 }

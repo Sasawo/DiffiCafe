@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -82,7 +81,6 @@ public class Inventory : MonoBehaviour
 		movementDirection *= -1;
 		distanceMoved = movementDistance - distanceMoved;
 	}
-
 	private void OnTriggerStay2D(Collider2D collision)
 	{
 		if (collision.gameObject.CompareTag("Draggable"))

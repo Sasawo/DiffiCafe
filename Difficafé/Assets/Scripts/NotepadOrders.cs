@@ -1,14 +1,36 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+[System.Serializable]
+struct CupSpriteList
+{
+    public List<SpriteList> sprites;
+}
+[System.Serializable]
+struct SpriteList
+{
+	public List<Sprite> sprites;
+}
 
 public class NotepadOrders : MonoBehaviour
 {
-    [NonSerialized] public List<Order> Orders;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [NonSerialized] public List<CustomerOrder> Orders;
+	[NonSerialized] public int CurrentIndex;
+    [SerializeField] List<Sprite> OrderCupSprites;
+    [SerializeField] SpriteRenderer OrderCup;
+	[SerializeField] List<CupSpriteList> OrderCupLayerSprites;
+	[SerializeField] List<SpriteRenderer> OrderCupLayers;
+	[SerializeField] List<Sprite> OrderExtraItemSprites;
+    [SerializeField] List<SpriteRenderer> OrderExtraItems;
+	[SerializeField] List<SpriteList> OrderExtraCupItemSprites;
+	[SerializeField] List<SpriteRenderer> OrderExtraCupItems;
+	// Start is called once before the first execution of Update after the MonoBehaviour is created
+	void Start()
     {
-        
+		CurrentIndex = 0;
+        Orders = new();
     }
 
     // Update is called once per frame
@@ -16,4 +38,36 @@ public class NotepadOrders : MonoBehaviour
     {
         
     }
+
+    public void DisplayOrder()
+    {
+        if (!Orders.Any()) return;
+
+        if (CurrentIndex >= Orders.Count) CurrentIndex -= 1;
+        else if (CurrentIndex < 0) CurrentIndex = 0;
+
+        CustomerOrder currentOrder = Orders[CurrentIndex];
+
+        OrderCup.sprite = OrderCupSprites[currentOrder.CupSize];
+
+        for (int i = 0; i < OrderCupLayers.Count; ++i)
+            OrderCupLayers[i].sprite = null;
+        
+		for (int i = 0; i < currentOrder.CupSize + 1; ++i)
+            OrderCupLayers[i].sprite = OrderCupLayerSprites[currentOrder.CupSize].sprites[i].sprites[(int)currentOrder.Layers[i]];
+
+        for (int i = 0; i < OrderExtraItems.Count; ++i)
+			OrderExtraItems[i].sprite = null;
+
+		for (int i = 0; i < OrderExtraItems.Count; ++i)
+        {
+            if (i < currentOrder.ExtraItems.Count)
+            {
+				OrderExtraItems[i].sprite = OrderExtraItemSprites[(int)currentOrder.ExtraItems[i]];
+				OrderExtraCupItems[i].sprite = OrderExtraCupItemSprites[currentOrder.CupSize].sprites[(int)currentOrder.ExtraItems[i]];
+			}
+		}
+
+
+	}
 }
