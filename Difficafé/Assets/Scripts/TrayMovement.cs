@@ -83,14 +83,14 @@ public class Inventory : MonoBehaviour
 	}
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("Draggable"))
+		if (collision.gameObject.CompareTag("DraggableCup"))
 		{
 			collision.gameObject.GetComponent<Draggable>().DefaultPosition = FindClosestFreeSlot(collision.gameObject);
 		}
 	}
 	private void OnTriggerExit2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag("Draggable"))
+		if (collision.gameObject.CompareTag("DraggableCup"))
 		{
 			int itemIndex = Array.IndexOf(inventoryItems, collision.gameObject);
 			if (itemIndex >= 0)
