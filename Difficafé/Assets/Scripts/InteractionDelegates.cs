@@ -127,14 +127,18 @@ public class InteractionDelegates : MonoBehaviour
 	public void CoffeeGrind(GameObject o)
 	{
 		StaticInventory inventory = o.GetComponent<StaticInventory>();
+		print(CoffeeMachineManager.Instance.GrinderUses);
+		if (CoffeeMachineManager.Instance.GrinderUses > 0)
+		{
+			CoffeeMachineManager.Instance.GrinderUses -= 1;
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/GrindCoffee"), false);
+		}
 
 		for (int i = 0; i < inventory.inventoryItems.Length; ++i)
 		{
-			if (inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite.name == "Coffee_spoon_empty_0" && CoffeeMachineManager.Instance.GrinderUses > 0)
+			if (inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite.name == "Coffee_spoon_empty_0")
 			{
 				inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite = FullSpoon;
-				CoffeeMachineManager.Instance.GrinderUses -= 1;
-				AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/GrindCoffee"), false);
 			}
 		}
 	}

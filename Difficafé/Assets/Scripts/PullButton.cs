@@ -28,8 +28,8 @@ public class PullButton : MonoBehaviour
 			} else if (gameObject.transform.position.y < DefaultHeight - PullDistance)
             {
                 gameObject.transform.position = new Vector3(gameObject.transform.position.x, DefaultHeight - PullDistance);
-                inventory.ExtraAction();
-                pulling = false;
+				pulling = false;
+				inventory.ExtraAction();
 			}
         } else if (!pressed)
         {
