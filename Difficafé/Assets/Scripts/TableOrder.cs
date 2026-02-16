@@ -53,7 +53,7 @@ public class CustomerData
         System.Random rng = new();
         Order = new CustomerOrder();
         Order.OrderId = id * 100 + cutomersIds++;
-        Order.CupSize = rng.Next(0, MySingleton.Instance.GetAllowedCupSize());
+        Order.CupSize = rng.Next(0, MySingleton.Instance.GetAllowedCupSize() + 1);
         Order.Layers = new CoffeeLayers[Order.CupSize + 1];
 		Array.Fill(Order.Layers, (CoffeeLayers)3);
 		Order.ExtraItems = new();

@@ -18,8 +18,8 @@ public class BasicButton : MonoBehaviour
 	{
 		if (rotating)
 		{
-			gameObject.transform.Rotate(0, 0, 2);
-			rotated += 2;
+			gameObject.transform.Rotate(0, 0, 1);
+			++rotated;
 
 			if (rotated >= 180)
 			{

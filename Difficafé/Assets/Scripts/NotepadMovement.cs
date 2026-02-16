@@ -26,6 +26,8 @@ public class NotepadMovement : MonoBehaviour
     {
 		if (moving && distanceMoved < MovementDistance)
 		{
+			GameObject.Find("Jug2").GetComponent<BoxCollider2D>().enabled = true;
+			GameObject.Find("WhippedCream").GetComponent<BoxCollider2D>().enabled = true;
 			gameObject.transform.position += new Vector3(0, movementDirection * MovementSpeed * Time.deltaTime, 0);
 			distanceMoved += MovementSpeed * Time.deltaTime;
 		}
@@ -37,8 +39,13 @@ public class NotepadMovement : MonoBehaviour
 			
 			if (movementDirection == 1)
 				gameObject.transform.position = new Vector3(gameObject.transform.position.x, GameObject.Find("Tray").transform.position.y + basePos, gameObject.transform.position.z);
-			
-			distanceMoved = 0;
+			else
+			{
+				GameObject.Find("Jug2").GetComponent<BoxCollider2D>().enabled = false;
+				GameObject.Find("WhippedCream").GetComponent<BoxCollider2D>().enabled = false;
+			}
+
+				distanceMoved = 0;
 		}
 	}
 
