@@ -8,7 +8,8 @@ public class CustomerManager : MonoBehaviour
 	[SerializeField] float CustomerSpawnTimer;
 	[SerializeField] List<TableOrder> Tables;
     [SerializeField] GameObject CustomerPreset;
-    List<GameObject> currentCustomers;
+	[SerializeField] List<Sprite> CustomerSprites;
+	List<GameObject> currentCustomers;
     int spawnedCount;
     int finishedCount;
     float timer;
@@ -44,13 +45,18 @@ public class CustomerManager : MonoBehaviour
 			CustomerData? customer = null;
 
 			timer = 0;
-            foreach (var t in Tables)
+            Tables.Shuffle();
+
+			foreach (var t in Tables)
                 if ((customer = t.GetCustomerSpot()) is not null) break;
 
             if (customer is null) return;
 
+            System.Random rng = new();
+
 			GameObject spawned = Instantiate(CustomerPreset, gameObject.transform.position, Quaternion.identity);
             ++spawnedCount;
+            spawned.GetComponent<SpriteRenderer>().sprite = CustomerSprites[rng.Next(0, CustomerSprites.Count)];
 			spawned.GetComponent<CustomerControl>().enabled = true;
 			spawned.GetComponent<CustomerControl>().customer = customer;
             customer.Customer = spawned.GetComponent<CustomerControl>();

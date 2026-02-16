@@ -54,7 +54,9 @@ public class Reset : MonoBehaviour
 			if (Play != null) AudioManager.Instance.PlaySound(Play, false);
 			ExtraAction?.Invoke(affected, gameObject);
 
-			affected = null;
+			if (affected == contained)
+				affected = null;
+
 			contained = null;
 		}
 	}

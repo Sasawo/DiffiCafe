@@ -19,7 +19,9 @@ public class NotepadOrders : MonoBehaviour
     [NonSerialized] public List<CustomerOrder> Orders;
 	[NonSerialized] public int CurrentIndex;
     [SerializeField] List<Sprite> OrderCupSprites;
-    [SerializeField] SpriteRenderer OrderCup;
+	[SerializeField] SpriteRenderer TableId;
+	[SerializeField] List<Sprite> TableIdSprites;
+	[SerializeField] SpriteRenderer OrderCup;
 	[SerializeField] List<CupSpriteList> OrderCupLayerSprites;
 	[SerializeField] List<SpriteRenderer> OrderCupLayers;
 	[SerializeField] List<Sprite> OrderExtraItemSprites;
@@ -52,6 +54,8 @@ public class NotepadOrders : MonoBehaviour
 
         CustomerOrder currentOrder = Orders[CurrentIndex];
 
+		TableId.sprite = TableIdSprites[currentOrder.OrderId / 100];
+
         OrderCup.sprite = OrderCupSprites[currentOrder.CupSize];
 
         for (int i = 0; i < OrderCupLayers.Count; ++i)
@@ -80,6 +84,8 @@ public class NotepadOrders : MonoBehaviour
 	}
     void DisplayEmpty()
     {
+		TableId.sprite = null;
+
 		OrderCup.sprite = null;
 
 		for (int i = 0; i < OrderCupLayers.Count; ++i)
