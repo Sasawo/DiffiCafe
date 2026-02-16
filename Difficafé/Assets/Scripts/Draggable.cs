@@ -50,7 +50,10 @@ public class Draggable : MonoBehaviour
 		}
 
 		if (Input.GetMouseButtonUp(0))
+		{
 			returning = true;
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/PutDown"), false, 0.1f);
+		}
 
 		Vector3 finalPos;
 
@@ -73,6 +76,7 @@ public class Draggable : MonoBehaviour
 		GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = false;
 		GetComponent<SpriteRenderer>().sortingOrder = DefaultRenderLayer;
 		currentInventory.ObjectPickedUp(gameObject);
+		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/PickUp"), false, 0.1f);
 		dragging = true;
 	}
 }

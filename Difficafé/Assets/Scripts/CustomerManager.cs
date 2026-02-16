@@ -34,6 +34,7 @@ public class CustomerManager : MonoBehaviour
 			spawned.GetComponent<CustomerControl>().enabled = true;
 			spawned.GetComponent<CustomerControl>().customer = customer;
             customer.Customer = spawned.GetComponent<CustomerControl>();
+            AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/CustomerEnter"), false);
 
 		}
 	}

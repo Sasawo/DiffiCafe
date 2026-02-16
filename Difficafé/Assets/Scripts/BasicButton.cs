@@ -21,6 +21,7 @@ public class BasicButton : MonoBehaviour
 				for (int i = 0; i < Layers; i++)
 				{
 					CupHolder.inventoryItems[0].GetComponent<OrderBuilder>().AddLayer(0);
+					AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/PourCoffee"), false);
 				}
 			}
 			CupHolder.inventoryItems[0].GetComponent<OrderBuilder>().Render();
@@ -29,6 +30,7 @@ public class BasicButton : MonoBehaviour
 			if (CupHolder.inventoryItems[0].CompareTag("DraggableJug") &&
 			CupHolder.inventoryItems[0].GetComponent<SpriteRenderer>().sprite.name == "Milk_full_milk_jug")
 				CupHolder.inventoryItems[0].GetComponent<SpriteRenderer>().sprite = resetSprite;
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/WhipMilk"), false);
 		}
 	}
 }

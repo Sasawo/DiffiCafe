@@ -12,5 +12,6 @@ public class Spawner : MonoBehaviour
 		spawned.GetComponent<Draggable>().FirstPosition = spawned.transform.position;
 		spawned.GetComponent<Draggable>().dragging = true;
 		GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = false;
+		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/PickUp"), false, 0.1f);
 	}
 }

@@ -5,6 +5,7 @@ public class Reset : MonoBehaviour
 {
 	[SerializeField] Sprite resetTo;
 	[SerializeField] Sprite resetFrom;
+	[SerializeField] AudioClip Play;
 	[SerializeField] string allowedTag;
 	[SerializeField] bool resetSelf;
 	[SerializeField] bool noReset;
@@ -19,7 +20,6 @@ public class Reset : MonoBehaviour
 		// Only track allowed objects
 		if (collision.gameObject.CompareTag(allowedTag))
 		{
-			print("inside");
 			contained = collision.gameObject;
 		}
 	}
@@ -51,9 +51,10 @@ public class Reset : MonoBehaviour
 			}
 
 			if (affected == null) affected = contained;
-
+			if (Play != null) AudioManager.Instance.PlaySound(Play, false);
 			ExtraAction?.Invoke(affected, gameObject);
 
+			affected = null;
 			contained = null;
 		}
 	}
