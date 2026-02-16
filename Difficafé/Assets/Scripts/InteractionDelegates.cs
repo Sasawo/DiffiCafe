@@ -86,6 +86,27 @@ public class InteractionDelegates : MonoBehaviour
 		}
 		notepad.DisplayOrder();
 	}
+	public void GiveTableOrder(GameObject o, GameObject o2)
+	{
+		if (!o.GetComponent<Draggable>().dragging) return;
+		NotepadOrders notepad = GameObject.Find("Notepad").GetComponent<NotepadOrders>();
+		var orders = o2.GetComponent<TableOrder>().GetTableOrder();
+		for (int i = 0; i < orders.Count; ++i)
+		{
+			if (orders[i].OrderTaken && orders[i].Order.CompareOrders(o.GetComponent<OrderBuilder>().order))
+			{
+				notepad.Orders.RemoveAll(x => x.OrderId == orders[i].Order.OrderId);
+				--notepad.CurrentIndex;
+				notepad.DisplayOrder();
+				orders[i].IsOccupied = false;
+				GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = true;
+				Destroy(o);
+				orders[i].Customer.ProgressState();
+				return;
+			}
+		}
+		notepad.DisplayOrder();
+	}
 
 	public void SpoonIntoMachine(GameObject spoon, GameObject spoonIn)
 	{
@@ -98,7 +119,7 @@ public class InteractionDelegates : MonoBehaviour
 		spoon.GetComponent<SpriteRenderer>().enabled = true;
 		spoonIn.GetComponent<SpriteRenderer>().enabled = false;
 	}
-	public void CoffeeGrind(GameObject o, GameObject o2)
+	public void CoffeeGrind(GameObject o)
 	{
 		StaticInventory inventory = o.GetComponent<StaticInventory>();
 
@@ -113,19 +134,19 @@ public class InteractionDelegates : MonoBehaviour
 	}
 	public void SetStraw(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.STRAW);
+		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.STRAW);
 	}
 	public void SetSugar(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.SUGAR);
+		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.SUGAR);
 	}
 	public void SetCinammon(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.CINNAMON);
+		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.CINNAMON);
 	}
 	public void SetCream(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.CREAM);
+		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.CREAM);
 	}
 	public void SetMilk(GameObject o, GameObject o2)
 	{

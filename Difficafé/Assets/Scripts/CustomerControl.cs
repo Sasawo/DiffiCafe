@@ -9,7 +9,7 @@ public class CustomerControl : MonoBehaviour
 	[SerializeField] float TrackingSpeed;
 	[SerializeField] float SpeedDampening;
 	[SerializeField] float AdditionalDampening;
-	public enum CustomerState { SPAWN, IDLE, LEAVING };
+	public enum CustomerState { SPAWN, IDLE, LEAVING, DONE };
     public CustomerState customerState;
 	int currentSplineIndex;
 	private void Awake()
@@ -36,6 +36,8 @@ public class CustomerControl : MonoBehaviour
             case CustomerState.LEAVING:
 				MoveToIndex(0, -1);
                 break;
+			case CustomerState.DONE:
+				break;
 			default:
                 break;
 		}
@@ -67,6 +69,10 @@ public class CustomerControl : MonoBehaviour
 				currentSplineIndex += increment;
 			}
 		}
+	}
+	public void ProgressState()
+	{
+		++customerState;
 	}
 
 

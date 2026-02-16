@@ -41,7 +41,11 @@ public class NotepadOrders : MonoBehaviour
 
     public void DisplayOrder()
     {
-        if (!Orders.Any()) return;
+        if (!Orders.Any())
+        {
+			DisplayEmpty();
+            return;
+		}
 
         if (CurrentIndex >= Orders.Count) CurrentIndex -= 1;
         else if (CurrentIndex < 0) CurrentIndex = 0;
@@ -60,7 +64,10 @@ public class NotepadOrders : MonoBehaviour
 		}
 
         for (int i = 0; i < OrderExtraItems.Count; ++i)
+        {
 			OrderExtraItems[i].sprite = null;
+			OrderExtraCupItems[i].sprite = null;
+		}
 
 		for (int i = 0; i < OrderExtraItems.Count; ++i)
         {
@@ -70,7 +77,18 @@ public class NotepadOrders : MonoBehaviour
 				OrderExtraCupItems[i].sprite = OrderExtraCupItemSprites[currentOrder.CupSize].sprites[(int)currentOrder.ExtraItems[i]];
 			}
 		}
+	}
+    void DisplayEmpty()
+    {
+		OrderCup.sprite = null;
 
+		for (int i = 0; i < OrderCupLayers.Count; ++i)
+			OrderCupLayers[i].sprite = null;
 
+		for (int i = 0; i < OrderExtraItems.Count; ++i)
+		{
+			OrderExtraItems[i].sprite = null;
+			OrderExtraCupItems[i].sprite = null;
+		}
 	}
 }

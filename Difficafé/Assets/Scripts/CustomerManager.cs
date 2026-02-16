@@ -32,7 +32,8 @@ public class CustomerManager : MonoBehaviour
 
 			GameObject spawned = Instantiate(CustomerPreset, gameObject.transform.position, Quaternion.identity);
 			spawned.GetComponent<CustomerControl>().enabled = true;
-			spawned.GetComponent<CustomerControl>().customer = (CustomerData)customer;
+			spawned.GetComponent<CustomerControl>().customer = customer;
+            customer.Customer = spawned.GetComponent<CustomerControl>();
 
 		}
 	}

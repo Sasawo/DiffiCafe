@@ -7,6 +7,7 @@ public class Reset : MonoBehaviour
 	[SerializeField] Sprite resetFrom;
 	[SerializeField] string allowedTag;
 	[SerializeField] bool resetSelf;
+	[SerializeField] bool noReset;
 	[SerializeField] GameObject affected;
 	[SerializeField] UnityEvent<GameObject, GameObject> ExtraAction;
 
@@ -36,13 +37,13 @@ public class Reset : MonoBehaviour
 		// Check if mouse released while object is over trigger
 		if (contained != null && Input.GetMouseButtonUp(0))
 		{
-			if (resetSelf)
+			if (resetSelf && !noReset)
 			{
 				var sr = GetComponent<SpriteRenderer>();
 				if (resetFrom == null || sr.sprite == resetFrom)
 					sr.sprite = resetTo;
 			}
-			else
+			else if (!noReset)
 			{
 				var sr = contained.GetComponent<SpriteRenderer>();
 				if (resetFrom == null || sr.sprite == resetFrom)

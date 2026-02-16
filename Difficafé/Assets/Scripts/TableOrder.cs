@@ -42,9 +42,9 @@ public class CustomerData
 {
     public List<GameObject> SplinePoints;
     public CustomerOrder Order;
+    public CustomerControl Customer;
     public bool IsOccupied;
     public bool OrderTaken;
-    public bool OrderDelivered;
     int cutomersIds = 0;
 
     public void GenerateOrder(int id)
@@ -52,16 +52,16 @@ public class CustomerData
         System.Random rng = new();
         Order = new CustomerOrder();
         Order.OrderId = id * 100 + cutomersIds++;
-        Order.CupSize = rng.Next(0, 2);
+        Order.CupSize = rng.Next(0, 3);
         Order.Layers = new CoffeeLayers[Order.CupSize + 1];
 		Array.Fill(Order.Layers, (CoffeeLayers)3);
 		Order.ExtraItems = new();
 
-        int layersCount = rng.Next(1, Order.CupSize + 1);
+        int layersCount = rng.Next(1, Order.CupSize + 2);
 		for (int i = 0; i < layersCount; ++i)
-            Order.Layers[i] = (CoffeeLayers)rng.Next(0, 2);
+            Order.Layers[i] = (CoffeeLayers)rng.Next(0, 3);
 
-        int extrasCount = rng.Next(0, 3);
+        int extrasCount = rng.Next(0, 4);
         List<int> extraItems = new List<int>() {0, 1, 2, 3 };
         extraItems.Shuffle();
 

@@ -49,6 +49,8 @@ public class Interact : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		if (!collision.gameObject.CompareTag("Player")) return;
+
 		if (InteractOnTouch)
 		{
 			RunInteract();
@@ -60,6 +62,8 @@ public class Interact : MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D collision)
 	{
+		if (!collision.gameObject.CompareTag("Player")) return;
+
 		if (InteractOnTouch)
 		{
 			RunInteract();

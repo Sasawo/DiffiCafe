@@ -10,12 +10,6 @@ public class NotepadPager : MonoBehaviour
         contains = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public bool Check()
     {
 		contains = GetComponent<BoxCollider2D>().OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
