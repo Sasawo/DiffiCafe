@@ -47,13 +47,14 @@ public class BasicButton : MonoBehaviour
 			CupHolder.inventoryItems[0].GetComponent<OrderBuilder>().Render();
 		} else
 		{
-			if (CupHolder.inventoryItems[0].CompareTag("DraggableJug") &&
+            AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/WhipMilk"), false);
+            rotating = true;
+
+            if (CupHolder.inventoryItems[0].CompareTag("DraggableJug") &&
 			CupHolder.inventoryItems[0].GetComponent<SpriteRenderer>().sprite.name == "Milk_full_milk_jug")
 			{
 				CupHolder.inventoryItems[0].GetComponent<SpriteRenderer>().sprite = resetSprite;
-				AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/WhipMilk"), false);
-				rotating = true;
 			}
-		}
+        }
 	}
 }
