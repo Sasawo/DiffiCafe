@@ -2389,6 +2389,7 @@ GameObject:
   - component: {fileID: 425407786}
   - component: {fileID: 425407785}
   - component: {fileID: 425407790}
+  - component: {fileID: 425407791}
   m_Layer: 3
   m_Name: CupMedium
   m_TagString: DraggableCup
@@ -2626,6 +2627,38 @@ MonoBehaviour:
       - m_Target: {fileID: 1229492592}
         m_TargetAssemblyTypeName: InteractionDelegates, Assembly-CSharp
         m_MethodName: SetMilk
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &425407791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 425407783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5e68ad09f10544c8eee4c91bd95b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Reset
+  resetTo: {fileID: -3634979804746815464, guid: 2595f31f9555d844d83e8fa426345747, type: 3}
+  resetFrom: {fileID: 0}
+  allowedTag: DraggableJug
+  resetSelf: 1
+  affected: {fileID: 0}
+  ExtraAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1229492592}
+        m_TargetAssemblyTypeName: InteractionDelegates, Assembly-CSharp
+        m_MethodName: SetFromJug
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7422,6 +7455,7 @@ GameObject:
   - component: {fileID: 1144966132}
   - component: {fileID: 1144966131}
   - component: {fileID: 1144966136}
+  - component: {fileID: 1144966137}
   m_Layer: 3
   m_Name: CupLarge
   m_TagString: DraggableCup
@@ -7665,6 +7699,38 @@ MonoBehaviour:
       - m_Target: {fileID: 1229492592}
         m_TargetAssemblyTypeName: InteractionDelegates, Assembly-CSharp
         m_MethodName: SetMilk
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1144966137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144966129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5e68ad09f10544c8eee4c91bd95b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Reset
+  resetTo: {fileID: -5402516941416454012, guid: bd5d8a8631c7d304c8ea2ddfefe6fae5, type: 3}
+  resetFrom: {fileID: 0}
+  allowedTag: DraggableJug
+  resetSelf: 1
+  affected: {fileID: 0}
+  ExtraAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1229492592}
+        m_TargetAssemblyTypeName: InteractionDelegates, Assembly-CSharp
+        m_MethodName: SetFromJug
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8945,6 +9011,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InteractionDelegates
   cupPreset: {fileID: 1763203041}
   FullSpoon: {fileID: -5405360402792696100, guid: 54747081397572442b987ef11d33aee0, type: 3}
+  JugEmpty: {fileID: 21300000, guid: 9b670fed56ecd9940b9dce9f74980468, type: 3}
+  JugHalfMilk: {fileID: 21300000, guid: 9de57aa9118466946b098ee71b3b105c, type: 3}
+  JugHalfWhipped: {fileID: 21300000, guid: 2d3c555da7c875b489fd43fb82de41b9, type: 3}
 --- !u!4 &1229492593
 Transform:
   m_ObjectHideFlags: 0
@@ -11764,6 +11833,7 @@ GameObject:
   - component: {fileID: 1763203048}
   - component: {fileID: 1763203049}
   - component: {fileID: 1763203050}
+  - component: {fileID: 1763203051}
   m_Layer: 3
   m_Name: CupSmall
   m_TagString: DraggableCup
@@ -11995,6 +12065,38 @@ MonoBehaviour:
       - m_Target: {fileID: 1229492592}
         m_TargetAssemblyTypeName: InteractionDelegates, Assembly-CSharp
         m_MethodName: SetMilk
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1763203051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763203041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5e68ad09f10544c8eee4c91bd95b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Reset
+  resetTo: {fileID: -7815854892556355276, guid: e4c160822e418d745859774461c3ac1e, type: 3}
+  resetFrom: {fileID: 0}
+  allowedTag: DraggableJug
+  resetSelf: 1
+  affected: {fileID: 0}
+  ExtraAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1229492592}
+        m_TargetAssemblyTypeName: InteractionDelegates, Assembly-CSharp
+        m_MethodName: SetFromJug
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

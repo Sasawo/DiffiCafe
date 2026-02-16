@@ -8,7 +8,7 @@ public class Reset : MonoBehaviour
 	[SerializeField] string allowedTag;
 	[SerializeField] bool resetSelf;
 	[SerializeField] GameObject affected;
-	[SerializeField] UnityEvent<GameObject> ExtraAction;
+	[SerializeField] UnityEvent<GameObject, GameObject> ExtraAction;
 
 
 	GameObject contained;  // object currently over trigger
@@ -51,7 +51,7 @@ public class Reset : MonoBehaviour
 
 			if (affected == null) affected = contained;
 
-			ExtraAction?.Invoke(affected);
+			ExtraAction?.Invoke(affected, gameObject);
 
 			contained = null;
 		}

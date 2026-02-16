@@ -7,6 +7,9 @@ public class InteractionDelegates : MonoBehaviour
 {
 	[SerializeField] GameObject cupPreset;
 	[SerializeField] Sprite FullSpoon;
+	[SerializeField] Sprite JugEmpty;
+	[SerializeField] Sprite JugHalfMilk;
+	[SerializeField] Sprite JugHalfWhipped;
 	public void GoToCoffeeMachine(GameObject self)
 	{
 		GameObject.Find("CoffeeCamera").GetComponent<Camera>().enabled = true;
@@ -95,7 +98,7 @@ public class InteractionDelegates : MonoBehaviour
 		spoon.GetComponent<SpriteRenderer>().enabled = true;
 		spoonIn.GetComponent<SpriteRenderer>().enabled = false;
 	}
-	public void CoffeeGrind(GameObject o)
+	public void CoffeeGrind(GameObject o, GameObject o2)
 	{
 		StaticInventory inventory = o.GetComponent<StaticInventory>();
 
@@ -108,37 +111,62 @@ public class InteractionDelegates : MonoBehaviour
 			}
 		}
 	}
-	public void SetStraw(GameObject o)
+	public void SetStraw(GameObject o, GameObject o2)
 	{
 		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.STRAW);
 	}
-	public void SetSugar(GameObject o)
+	public void SetSugar(GameObject o, GameObject o2)
 	{
 		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.SUGAR);
 	}
-	public void SetCinammon(GameObject o)
+	public void SetCinammon(GameObject o, GameObject o2)
 	{
 		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.CINNAMON);
 	}
-	public void SetCream(GameObject o)
+	public void SetCream(GameObject o, GameObject o2)
 	{
 		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(CustomerOrder.Extras.CREAM);
 	}
-	public void SetMilk(GameObject o)
+	public void SetMilk(GameObject o, GameObject o2)
 	{
 		o.GetComponent<OrderBuilder>().AddLayer(1);
 		o.GetComponent<OrderBuilder>().Render();
 	}
-	public void SetWMilk(GameObject o)
+	public void SetWMilk(GameObject o, GameObject o2)
 	{
 		o.GetComponent<OrderBuilder>().AddLayer(2);
 		o.GetComponent<OrderBuilder>().Render();
 	}
-	public void ResetCup(GameObject o)
+	public void ResetCup(GameObject o, GameObject o2)
 	{
 		Array.Fill(o.GetComponent<OrderBuilder>().order.Layers, (CoffeeLayers)3);
 		o.GetComponent<OrderBuilder>().order.ExtraItems = new();
 		o.GetComponent<OrderBuilder>().layersCount = 0;
 		o.GetComponent<OrderBuilder>().Render();
+	}
+	public void SetFromJug(GameObject o, GameObject o2)
+	{
+		switch(o.GetComponent<SpriteRenderer>().sprite.name)
+		{
+			case "Milk_jug":
+				return;
+			case "Milk_half_milk_jug":
+				if (o2.GetComponent<OrderBuilder>().AddLayer(1))
+					o.GetComponent<SpriteRenderer>().sprite = JugEmpty;
+				break;
+			case "Milk_full_milk_jug":
+				if (o2.GetComponent<OrderBuilder>().AddLayer(1))
+					o.GetComponent<SpriteRenderer>().sprite = JugHalfMilk;
+				break;
+			case "Crema_half_milk_jug":
+				if (o2.GetComponent<OrderBuilder>().AddLayer(2))
+					o.GetComponent<SpriteRenderer>().sprite = JugEmpty;
+				break;
+			case "Crema_full_milk_jug":
+				if (o2.GetComponent<OrderBuilder>().AddLayer(2))
+					o.GetComponent<SpriteRenderer>().sprite = JugHalfWhipped;
+				break;
+		}
+		o2.GetComponent<OrderBuilder>().Render();
 	}
 }

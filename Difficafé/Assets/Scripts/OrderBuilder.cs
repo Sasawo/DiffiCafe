@@ -23,10 +23,11 @@ public class OrderBuilder : MonoBehaviour
         layersCount = 0;
     }
 
-    public void AddLayer(int type)
+    public bool AddLayer(int type)
     {
-        if (layersCount == CupSize + 1) return;
+        if (layersCount == CupSize + 1) return false;
         order.Layers[layersCount++] = (CoffeeLayers)type;
+		return true;
     }
 
     public void Render()
