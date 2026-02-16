@@ -216,4 +216,18 @@ public class InteractionDelegates : MonoBehaviour
 		}
 		o2.GetComponent<OrderBuilder>().Render();
 	}
+	public void KillObject(GameObject o, GameObject o2)
+	{
+		if (!o.GetComponent<Draggable>().dragging)
+		{
+			GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = true;
+			Destroy(o);
+		}
+	}
+
+	public void SetBack(GameObject o, GameObject o2)
+	{
+		if (o.CompareTag("DraggableSpoon"))
+			o.GetComponent<Draggable>().DefaultPosition = o.GetComponent<Draggable>().FirstPosition;
+	}
 }

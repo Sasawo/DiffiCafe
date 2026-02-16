@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static CustomerOrder;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CustomerOrder
 {
@@ -52,22 +53,26 @@ public class CustomerData
         System.Random rng = new();
         Order = new CustomerOrder();
         Order.OrderId = id * 100 + cutomersIds++;
-        Order.CupSize = rng.Next(0, 3);
+        Order.CupSize = rng.Next(0, MySingleton.Instance.GetAllowedCupSize());
         Order.Layers = new CoffeeLayers[Order.CupSize + 1];
 		Array.Fill(Order.Layers, (CoffeeLayers)3);
 		Order.ExtraItems = new();
 
         int layersCount = rng.Next(1, Order.CupSize + 2);
-		for (int i = 0; i < layersCount; ++i)
-            Order.Layers[i] = (CoffeeLayers)rng.Next(0, 3);
+        for (int i = 0; i < layersCount; ++i)
+        {
+			CoffeeLayers layer = (CoffeeLayers)rng.Next(0, 3);
+            while (!MySingleton.Instance.GetAllowedLayers().Contains(layer)) layer = (CoffeeLayers)rng.Next(0, 3);
+            Order.Layers[i] = layer;
+		}
 
-        int extrasCount = rng.Next(0, 4);
+        int extrasCount = Math.Min(rng.Next(0, 4), MySingleton.Instance.GetAllowedExtras().Count);
         List<int> extraItems = new List<int>() {0, 1, 2, 3 };
         extraItems.Shuffle();
+        extraItems.RemoveAll(x => !MySingleton.Instance.GetAllowedExtras().Contains((Extras)x));
 
 		for (int i = 0; i < extrasCount; ++i)
-            Order.ExtraItems.Add((Extras)extraItems[i]);
-
+		    Order.ExtraItems.Add((Extras)extraItems[i]);
     }
 }
 

@@ -19,7 +19,7 @@ public class MenuDelegates : MonoBehaviour
 
 	public void ExitButton()
     {
-		//PlayerPrefs.DeleteAll();
+		PlayerPrefs.DeleteAll();
 		Application.Quit();
 #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false; // stops play mode in editor

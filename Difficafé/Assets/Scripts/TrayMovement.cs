@@ -124,6 +124,7 @@ public class Inventory : MonoBehaviour
 		else
 		{
 			inventoryItems[index] = item;
+			item.GetComponent<Draggable>().currentInventory = gameObject.GetComponent<StaticInventory>();
 			return inventorySlots[index].transform.position;
 		}
 	}
@@ -134,5 +135,13 @@ public class Inventory : MonoBehaviour
 		movementDirection *= -1;
 		cameraDistanceVector -= new Vector3(2 * (gameObject.transform.position.x - GameObject.FindWithTag("MainCamera").transform.position.x), 0);
 		gameObject.transform.position -= new Vector3(2 * (gameObject.transform.position.x - GameObject.FindWithTag("MainCamera").transform.position.x), 0);
+		for (int i = 0; i < inventorySlots.Length; ++i)
+		{
+			inventorySlots[i].transform.position =
+				new Vector3(gameObject.transform.position.x + inventorySlotOffsets[i].x, gameObject.transform.position.y + inventorySlotOffsets[i].y, 0);
+
+			if (inventoryItems[i] is not null && !inventoryItems[i].GetComponent<Draggable>().dragging) inventoryItems[i].transform.position =
+					new Vector3(gameObject.transform.position.x + inventorySlotOffsets[i].x, gameObject.transform.position.y + inventorySlotOffsets[i].y, 0);
+		}
 	}
 }

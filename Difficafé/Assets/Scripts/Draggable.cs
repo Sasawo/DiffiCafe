@@ -14,7 +14,8 @@ public class Draggable : MonoBehaviour
 	[SerializeField] bool StoreInitialPosition;
 	[SerializeField] bool DestroyOnReturn;
 	[SerializeField] int DefaultRenderLayer;
-	[NonSerialized] public StaticInventory currentInventory = new StaticInventory();
+	[SerializeField] int DraggingRenderLayer;
+	[NonSerialized] public StaticInventory currentInventory;
 	bool returning;
 	[NonSerialized] public bool dragging;
 	void Start()
@@ -31,7 +32,13 @@ public class Draggable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (!dragging) return;
+		if (!dragging)
+		{
+			GetComponent<SpriteRenderer>().sortingOrder = currentInventory != null ? currentInventory.RenderLayer : DefaultRenderLayer;
+			return;
+		}
+
+		GetComponent<SpriteRenderer>().sortingOrder = DraggingRenderLayer;
 
 		if (Vector2.Distance(gameObject.transform.position, DefaultPosition) < 0.5 && returning)
 		{
@@ -42,7 +49,7 @@ public class Draggable : MonoBehaviour
 			if (DefaultPosition == FirstPosition && DestroyOnReturn)
 				Destroy(gameObject);
 
-			currentInventory.ObjectPutDown(gameObject);
+			try { currentInventory.ObjectPutDown(gameObject); } catch { }
 
 			gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 			gameObject.transform.position = DefaultPosition;
@@ -75,7 +82,7 @@ public class Draggable : MonoBehaviour
 	{
 		GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = false;
 		GetComponent<SpriteRenderer>().sortingOrder = DefaultRenderLayer;
-		currentInventory.ObjectPickedUp(gameObject);
+		try { currentInventory.ObjectPickedUp(gameObject); } catch { }
 		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/PickUp"), false, 0.1f);
 		dragging = true;
 	}

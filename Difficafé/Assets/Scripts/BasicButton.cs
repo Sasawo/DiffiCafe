@@ -8,7 +8,27 @@ public class BasicButton : MonoBehaviour
 	[SerializeField] Sprite resetSprite;
 	[SerializeField] int Layers;
 	[SerializeField] bool forCoffee;
+	bool rotating;
+	int rotated = 0;
+	private void Start()
+	{
+		rotating = false;
+	}
+	private void Update()
+	{
+		if (rotating)
+		{
+			gameObject.transform.Rotate(0, 0, 2);
+			rotated += 2;
 
+			if (rotated >= 180)
+			{
+				gameObject.transform.Rotate(0, 0, -rotated);
+				rotated = 0;
+				rotating = false;
+			}
+		}
+	}
 	private void OnMouseDown()
 	{
 		if (forCoffee)
@@ -29,8 +49,11 @@ public class BasicButton : MonoBehaviour
 		{
 			if (CupHolder.inventoryItems[0].CompareTag("DraggableJug") &&
 			CupHolder.inventoryItems[0].GetComponent<SpriteRenderer>().sprite.name == "Milk_full_milk_jug")
+			{
 				CupHolder.inventoryItems[0].GetComponent<SpriteRenderer>().sprite = resetSprite;
-			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/WhipMilk"), false);
+				AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/WhipMilk"), false);
+				rotating = true;
+			}
 		}
 	}
 }

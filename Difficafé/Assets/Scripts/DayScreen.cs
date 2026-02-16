@@ -11,6 +11,8 @@ public class DayScreen : MonoBehaviour
     float timer;
     void Start()
     {
+        AudioManager.Instance.StopSound();
+        AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Impact"), false);
         timer = 0;
         try { GameObject.Find("Daytext").GetComponent<TMP_Text>().text += "\n" + (PlayerPrefs.GetInt("Day") + 1); }
         catch { }
@@ -19,11 +21,13 @@ public class DayScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0)) { timer += WaitTime; }
+
         timer += Time.deltaTime;
 
         if (timer >= WaitTime)
         {
-            PlayerPrefs.SetInt("Day", PlayerPrefs.GetInt("Day") + 1);
+            PlayerPrefs.SetInt("Day", PlayerPrefs.GetInt("Day") + IncrementDays);
 
             if (PlayerPrefs.GetInt("Day") >= 5)
 				SceneManager.LoadScene("VictoryScene");

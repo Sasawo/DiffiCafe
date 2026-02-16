@@ -12,7 +12,7 @@ public class StaticInventory : MonoBehaviour
 	[NonReorderable] public GameObject[] inventorySlots;
 	[NonSerialized][NonReorderable] public GameObject[] inventoryItems;
 	[SerializeField] List<string> AllowedTags;
-	[SerializeField] int RenderLayer;
+	[SerializeField] public int RenderLayer;
 	[SerializeField] GameObject affected;
 	[SerializeField] UnityEvent<GameObject, GameObject> OnPutDown;
 	[SerializeField] UnityEvent<GameObject, GameObject> OnPickUp;
