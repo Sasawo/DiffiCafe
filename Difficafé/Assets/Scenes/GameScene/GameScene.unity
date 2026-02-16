@@ -8157,8 +8157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d57dde5d71cf344e9a5d0b3dafa242b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  CustomerSpawnOffset: 0
-  CustomerSpawnTimer: 2
+  CustomerSpawnOffset: 10
+  CustomerSpawnTimer: 20
   Tables:
   - {fileID: 1976925275}
   - {fileID: 1940836059}
