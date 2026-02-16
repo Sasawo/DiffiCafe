@@ -10,6 +10,11 @@ TagManager:
   - DraggableBag
   - DraggableJug
   - DraggableMilk
+  - DraggableStraw
+  - DraggableCream
+  - DraggableSugar
+  - DraggableCinammon
+  - DraggableExtras
   layers:
   - Default
   - TransparentFX

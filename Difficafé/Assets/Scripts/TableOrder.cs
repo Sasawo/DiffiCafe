@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,7 +7,7 @@ using static CustomerOrder;
 
 public class CustomerOrder
 {
-	public enum CoffeeLayers { COFFEE, MILK, W_MILK }
+	public enum CoffeeLayers { COFFEE, MILK, W_MILK, NONE }
 	public enum Extras { STRAW, CREAM, SUGAR, CINNAMON }
 	public int OrderId;
 	public int CupSize;
@@ -53,9 +54,11 @@ public class CustomerData
         Order.OrderId = id * 100 + cutomersIds++;
         Order.CupSize = rng.Next(0, 2);
         Order.Layers = new CoffeeLayers[Order.CupSize + 1];
-        Order.ExtraItems = new();
-        
-        for (int i = 0; i < Order.Layers.Length; ++i)
+		Array.Fill(Order.Layers, (CoffeeLayers)3);
+		Order.ExtraItems = new();
+
+        int layersCount = rng.Next(1, Order.CupSize + 1);
+		for (int i = 0; i < layersCount; ++i)
             Order.Layers[i] = (CoffeeLayers)rng.Next(0, 2);
 
         int extrasCount = rng.Next(0, 3);

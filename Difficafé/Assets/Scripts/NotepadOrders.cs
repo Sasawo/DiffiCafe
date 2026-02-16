@@ -9,7 +9,7 @@ struct CupSpriteList
     public List<SpriteList> sprites;
 }
 [System.Serializable]
-struct SpriteList
+public struct SpriteList
 {
 	public List<Sprite> sprites;
 }
@@ -54,7 +54,10 @@ public class NotepadOrders : MonoBehaviour
             OrderCupLayers[i].sprite = null;
         
 		for (int i = 0; i < currentOrder.CupSize + 1; ++i)
-            OrderCupLayers[i].sprite = OrderCupLayerSprites[currentOrder.CupSize].sprites[i].sprites[(int)currentOrder.Layers[i]];
+        {
+            if (currentOrder.Layers[i] == (CustomerOrder.CoffeeLayers)3) break;
+			OrderCupLayers[i].sprite = OrderCupLayerSprites[currentOrder.CupSize].sprites[i].sprites[(int)currentOrder.Layers[i]];
+		}
 
         for (int i = 0; i < OrderExtraItems.Count; ++i)
 			OrderExtraItems[i].sprite = null;
