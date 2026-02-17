@@ -81,6 +81,7 @@ public class InteractionDelegates : MonoBehaviour
 		var orders = self.GetComponent<TableOrder>().GetTableOrder();
 		for (int i = 0; i < orders.Count; ++i)
 		{
+			if (orders[i].Customer == null || orders[i].Customer.customerState != CustomerControl.CustomerState.IDLE) continue;
 			if (!orders[i].OrderTaken) AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/TakeOrder"), false, 0.2f);
 			notepad.Orders.Add(orders[i].Order);
 			orders[i].OrderTaken = true;
