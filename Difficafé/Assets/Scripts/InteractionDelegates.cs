@@ -146,6 +146,7 @@ public class InteractionDelegates : MonoBehaviour
 	{
 		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.STRAW);
 		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Straw"), false);
+		Destroy(GameObject.Find("Straw(Clone)"));
 	}
 	public void SetSugar(GameObject o, GameObject o2)
 	{

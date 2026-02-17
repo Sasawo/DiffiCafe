@@ -11205,12 +11205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5e68ad09f10544c8eee4c91bd95b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reset
-  resetTo: {fileID: -8743958704583296358, guid: 1832d9dacf142da408a88f8716533b78, type: 3}
+  resetTo: {fileID: 0}
   resetFrom: {fileID: 0}
   Play: {fileID: 0}
   allowedTag: DraggableStraw
-  resetSelf: 1
-  noReset: 0
+  resetSelf: 0
+  noReset: 1
   affected: {fileID: 425407783}
   ExtraAction:
     m_PersistentCalls:
@@ -11439,12 +11439,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5e68ad09f10544c8eee4c91bd95b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reset
-  resetTo: {fileID: -7162068937600557228, guid: 02c709d1776874249b94660da0709936, type: 3}
+  resetTo: {fileID: 0}
   resetFrom: {fileID: 0}
   Play: {fileID: 0}
   allowedTag: DraggableStraw
-  resetSelf: 1
-  noReset: 0
+  resetSelf: 0
+  noReset: 1
   affected: {fileID: 1763203041}
   ExtraAction:
     m_PersistentCalls:
@@ -20225,12 +20225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5e68ad09f10544c8eee4c91bd95b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reset
-  resetTo: {fileID: -3424308300955375631, guid: 83bd130157dab2b4c810dc3bc4dfb54f, type: 3}
+  resetTo: {fileID: 0}
   resetFrom: {fileID: 0}
   Play: {fileID: 0}
   allowedTag: DraggableStraw
-  resetSelf: 1
-  noReset: 0
+  resetSelf: 0
+  noReset: 1
   affected: {fileID: 1144966129}
   ExtraAction:
     m_PersistentCalls:
