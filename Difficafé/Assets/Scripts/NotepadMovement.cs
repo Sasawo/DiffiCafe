@@ -11,6 +11,7 @@ public class NotepadMovement : MonoBehaviour
 	int movementDirection = 1;
 	float distanceMoved = 0;
 	float basePos;
+	bool inactive;
 	private void Awake()
 	{
 		basePos = gameObject.transform.position.y - GameObject.Find("Tray").transform.position.y;
@@ -19,6 +20,7 @@ public class NotepadMovement : MonoBehaviour
 	void Start()
     {
         moving = false;
+		inactive = false;
 	}
 
     // Update is called once per frame
@@ -26,8 +28,7 @@ public class NotepadMovement : MonoBehaviour
     {
 		if (moving && distanceMoved < MovementDistance)
 		{
-			GameObject.Find("Jug2").GetComponent<BoxCollider2D>().enabled = true;
-			GameObject.Find("WhippedCream").GetComponent<BoxCollider2D>().enabled = true;
+			CoffeeMachineManager.Instance.draggableIsActive = true;
 			gameObject.transform.position += new Vector3(0, movementDirection * MovementSpeed * Time.deltaTime, 0);
 			distanceMoved += MovementSpeed * Time.deltaTime;
 		}
@@ -36,16 +37,15 @@ public class NotepadMovement : MonoBehaviour
 			moving = false;
 			movementDirection *= -1;
 			gameObject.transform.position += new Vector3(0, -Mathf.Abs(distanceMoved - MovementDistance) * movementDirection, 0);
-			
+			distanceMoved = 0;
+
 			if (movementDirection == 1)
 				gameObject.transform.position = new Vector3(gameObject.transform.position.x, GameObject.Find("Tray").transform.position.y + basePos, gameObject.transform.position.z);
 			else
 			{
-				GameObject.Find("Jug2").GetComponent<BoxCollider2D>().enabled = false;
-				GameObject.Find("WhippedCream").GetComponent<BoxCollider2D>().enabled = false;
+				gameObject.transform.position = new Vector3(gameObject.transform.position.x, GameObject.Find("Tray").transform.position.y + basePos + MovementDistance, gameObject.transform.position.z);
+				CoffeeMachineManager.Instance.draggableIsActive = false;
 			}
-
-				distanceMoved = 0;
 		}
 	}
 
@@ -57,6 +57,11 @@ public class NotepadMovement : MonoBehaviour
 	private void OnMouseEnter()
 	{
 		if (Up.GetComponent<NotepadPager>().Contained() || Down.GetComponent<NotepadPager>().Contained()) return;
+		if (CoffeeMachineManager.Instance.currentlyDragging)
+		{
+			inactive = true;
+			return;
+		}
 
 		if (moving) FlipDirection();
 		moving = true;
@@ -64,7 +69,14 @@ public class NotepadMovement : MonoBehaviour
 
 	private void OnMouseExit()
 	{
+		if (inactive)
+		{
+			inactive = false;
+			return;
+		}
+
 		if (Up.GetComponent<NotepadPager>().Check() || Down.GetComponent<NotepadPager>().Check()) return;
+		if (CoffeeMachineManager.Instance.currentlyDragging) return;
 
 		if (moving) FlipDirection();
 		moving = true;

@@ -81,8 +81,9 @@ public class InteractionDelegates : MonoBehaviour
 		var orders = self.GetComponent<TableOrder>().GetTableOrder();
 		for (int i = 0; i < orders.Count; ++i)
 		{
-			if (orders[i].Customer == null || orders[i].Customer.customerState != CustomerControl.CustomerState.IDLE) continue;
-			if (!orders[i].OrderTaken) AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/TakeOrder"), false, 0.2f);
+			if (orders[i].Customer == null || orders[i].Customer.customerState != CustomerControl.CustomerState.IDLE || orders[i].OrderTaken) continue;
+
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/TakeOrder"), false, 0.2f);
 			notepad.Orders.Add(orders[i].Order);
 			orders[i].OrderTaken = true;
 		}
@@ -106,6 +107,8 @@ public class InteractionDelegates : MonoBehaviour
 				Destroy(o);
 				orders[i].Customer.ProgressState();
 				AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/GiveCoffee"), false);
+
+				if (PlayerPrefs.GetInt("Infinite") == 1) GameObject.Find("CustomerSpawner").GetComponent<Endless>().CustomerAdd();
 				return;
 			}
 		}
@@ -137,32 +140,52 @@ public class InteractionDelegates : MonoBehaviour
 
 		for (int i = 0; i < inventory.inventoryItems.Length; ++i)
 		{
-			if (inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite.name == "Coffee_spoon_empty_0")
+			if (inventory.inventoryItems[i] != null && inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite.name == "Coffee_spoon_empty_0")
 			{
 				inventory.inventoryItems[i].GetComponent<SpriteRenderer>().sprite = FullSpoon;
 			}
 		}
+
+		if (CoffeeMachineManager.Instance.GrinderUses == 0)
+			GameObject.Find("Grinder").GetComponent<SpriteRenderer>().enabled = false;
+	}
+	public void FillGrinder(GameObject o, GameObject o2)
+	{
+		o2.GetComponent<SpriteRenderer>().enabled = true;
+		CoffeeMachineManager.Instance.GrinderUses = 8;
 	}
 	public void SetStraw(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.STRAW);
-		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Straw"), false);
-		Destroy(GameObject.Find("Straw(Clone)"));
+		if (!o.GetComponent<OrderBuilder>().order.ExtraItems.Contains(Extras.STRAW))
+		{
+			o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.STRAW);
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Straw"), false);
+			Destroy(GameObject.Find("Straw(Clone)"));
+		}
 	}
 	public void SetSugar(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.SUGAR);
-		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Sugar_Cinammon"), false);
+		if (!o.GetComponent<OrderBuilder>().order.ExtraItems.Contains(Extras.SUGAR))
+		{
+			o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.SUGAR);
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Sugar_Cinammon"), false);
+		}
 	}
 	public void SetCinammon(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.CINNAMON);
-		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Sugar_Cinammon"), false);
+		if (!o.GetComponent<OrderBuilder>().order.ExtraItems.Contains(Extras.CINNAMON))
+		{
+			o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.CINNAMON);
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Sugar_Cinammon"), false);
+		}
 	}
 	public void SetCream(GameObject o, GameObject o2)
 	{
-		o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.CREAM);
-		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/WhippedCream"), false);
+		if (!o.GetComponent<OrderBuilder>().order.ExtraItems.Contains(Extras.CREAM))
+		{
+			o.GetComponent<OrderBuilder>().order.ExtraItems.Add(Extras.CREAM);
+			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/WhippedCream"), false);
+		}
 	}
 	public void SetMilk(GameObject o, GameObject o2)
 	{
@@ -229,11 +252,5 @@ public class InteractionDelegates : MonoBehaviour
 			GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = true;
 			Destroy(o);
 		}
-	}
-
-	public void SetBack(GameObject o, GameObject o2)
-	{
-		if (o.CompareTag("DraggableSpoon"))
-			o.GetComponent<Draggable>().DefaultPosition = o.GetComponent<Draggable>().FirstPosition;
 	}
 }

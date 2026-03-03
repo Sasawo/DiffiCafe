@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class BasicButton : MonoBehaviour
+public class BasicButton : MonoBehaviour, IClickable
 {
     [SerializeField] StaticInventory CupHolder;
     [SerializeField] StaticInventory SpoonHolder;
@@ -29,7 +29,7 @@ public class BasicButton : MonoBehaviour
 			}
 		}
 	}
-	private void OnMouseDown()
+	public void OnClick()
 	{
 		if (forCoffee)
 		{

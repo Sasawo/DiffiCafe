@@ -7,6 +7,7 @@ public class Interact : MonoBehaviour
 	[SerializeField] UnityEvent<GameObject> onInteract;
 	[SerializeField] UnityEvent<GameObject> onReturnInteract;
 	[SerializeField] bool InteractOnTouch;
+	[SerializeField] bool DisableDraggable;
 	[SerializeField] bool InventoryRight;
 	[SerializeField] bool autoUninteract;
 	bool active = false;
@@ -35,6 +36,10 @@ public class Interact : MonoBehaviour
 
 	void RunInteract()
 	{
+		if (DisableDraggable)
+			foreach (var d in FindObjectsByType<Draggable>(FindObjectsSortMode.None))
+				d.GetComponent<Draggable>().returning = true;
+
 		if (InventoryRight != GameObject.Find("Tray").GetComponent<Inventory>().isRight) GameObject.Find("Tray").GetComponent<Inventory>().SwitchSide();
 
 		onInteract?.Invoke(gameObject);

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class Draggable : MonoBehaviour
+public class Draggable : MonoBehaviour, IClickable
 {
 	float DeltaTimeCompensation = 400;
 	[NonSerialized] public Vector3 DefaultPosition;
@@ -16,7 +16,7 @@ public class Draggable : MonoBehaviour
 	[SerializeField] int DefaultRenderLayer;
 	[SerializeField] int DraggingRenderLayer;
 	[NonSerialized] public StaticInventory currentInventory;
-	bool returning;
+	[NonSerialized] public bool returning;
 	[NonSerialized] public bool dragging;
 	void Start()
     {
@@ -32,9 +32,11 @@ public class Draggable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
 		if (!dragging)
 		{
 			GetComponent<SpriteRenderer>().sortingOrder = currentInventory != null ? currentInventory.RenderLayer : DefaultRenderLayer;
+			returning = false;
 			return;
 		}
 
@@ -58,6 +60,7 @@ public class Draggable : MonoBehaviour
 
 		if (Input.GetMouseButtonUp(0))
 		{
+			CoffeeMachineManager.Instance.currentlyDragging = false;
 			returning = true;
 			AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/PutDown"), false, 0.1f);
 		}
@@ -72,15 +75,18 @@ public class Draggable : MonoBehaviour
 			finalPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		}
 
-		gameObject.GetComponent<Rigidbody2D>().linearVelocity *= SpeedDampening;
+		//gameObject.GetComponent<Rigidbody2D>().linearVelocity *= SpeedDampening;
+		gameObject.GetComponent<Rigidbody2D>().linearVelocity -= (1 - SpeedDampening) * gameObject.GetComponent<Rigidbody2D>().linearVelocity * Time.deltaTime * DeltaTimeCompensation;
 
 		gameObject.GetComponent<Rigidbody2D>().linearVelocity += 
 			new Vector2((finalPos.x - gameObject.transform.position.x) * TrackingSpeed, (finalPos.y - gameObject.transform.position.y) * TrackingSpeed) * AdditionalDampening * Time.deltaTime * DeltaTimeCompensation;
 	}
 
-	private void OnMouseDown()
+	public void OnClick()
 	{
-		GameObject.Find("Notepad").GetComponent<NotepadMovement>().enabled = false;
+		if (!CoffeeMachineManager.Instance.draggableIsActive) return;
+		CoffeeMachineManager.Instance.currentlyDragging = true;
+
 		GetComponent<SpriteRenderer>().sortingOrder = DefaultRenderLayer;
 		try { currentInventory.ObjectPickedUp(gameObject); } catch { }
 		AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/PickUp"), false, 0.1f);

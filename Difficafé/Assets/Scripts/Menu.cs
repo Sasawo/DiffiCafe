@@ -8,5 +8,7 @@ public class Menu : MonoBehaviour
     {
 		AudioManager.Instance.StopSound();
 		AudioManager.Instance.PlaySound(clip, true, volume);
+		if (!PlayerPrefs.HasKey("Infinite")) PlayerPrefs.SetInt("Infinite", 0);
+		if (!PlayerPrefs.HasKey("InfiniteWin")) PlayerPrefs.SetInt("InfiniteWin", 0);
 	}
 }

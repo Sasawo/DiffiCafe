@@ -21,13 +21,22 @@ public class CustomerManager : MonoBehaviour
 		timer = 0;
 		spawnedCount = 0;
 		finishedCount = 0;
-
 	}
 
     // Update is called once per frame
     void Update()
     {
-        if (finishedCount == MySingleton.Instance.GetAllowedCustomerCount()) SceneManager.LoadScene("EveScene");
+        if (PlayerPrefs.GetInt("Infinite") == 1 && PlayerPrefs.GetInt("InfiniteWin") == 0 && finishedCount >= 100) PlayerPrefs.SetInt("InfiniteWin", 1);
+
+		if (finishedCount == MySingleton.Instance.GetAllowedCustomerCount() || (GetComponent<Endless>().enabled && GetComponent<Endless>().CheckTimer()))
+        {
+			if (PlayerPrefs.GetInt("Infinite") == 0) SceneManager.LoadScene("EveScene");
+
+			if (PlayerPrefs.GetInt("InfiniteWin") == 0) SceneManager.LoadScene("MenuScene");
+			else SceneManager.LoadScene("InfiniteVictoryScene");
+
+            return;
+		}
 
         for (int i = currentCustomers.Count - 1; i >= 0; --i)
         {

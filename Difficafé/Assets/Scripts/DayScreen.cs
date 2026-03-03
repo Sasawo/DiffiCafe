@@ -29,7 +29,7 @@ public class DayScreen : MonoBehaviour
         {
             PlayerPrefs.SetInt("Day", PlayerPrefs.GetInt("Day") + IncrementDays);
 
-            if (PlayerPrefs.GetInt("Day") >= 5)
+			if (PlayerPrefs.GetInt("Day") > 5)
 				SceneManager.LoadScene("VictoryScene");
 
             SceneManager.LoadScene(GoToScene);

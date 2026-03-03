@@ -6,14 +6,15 @@ public class MenuDelegates : MonoBehaviour
 {
     public void PlayButton()
     {
-		PlayerPrefs.SetInt("Day", 0);
+		PlayerPrefs.SetInt("Day", 1);
+		PlayerPrefs.SetInt("Infinite", 0);
 		SceneManager.LoadScene("LoreScene");
 	}
 
 	public void ContinueButton()
 	{
 		if (!PlayerPrefs.HasKey("Day")) return;
-
+		PlayerPrefs.SetInt("Infinite", 0);
 		SceneManager.LoadScene("DayScene");
 	}
 
@@ -24,5 +25,11 @@ public class MenuDelegates : MonoBehaviour
 #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false; // stops play mode in editor
 #endif
+	}
+
+	public void InfiniteButton()
+	{
+		PlayerPrefs.SetInt("Infinite", 1);
+		SceneManager.LoadScene("InfiniteLoreScene");
 	}
 }

@@ -18,9 +18,9 @@ public class MySingleton : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	public int GetAllowedCupSize() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day")].CupSizeCap;
-	public int GetAllowedCustomerCount() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day")].CustomerCount;
-	public List<CustomerOrder.CoffeeLayers> GetAllowedLayers() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day")].AllowedLayers;
-	public List<CustomerOrder.Extras> GetAllowedExtras() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day")].AllowedExtras;
+	public int GetAllowedCupSize() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day") * (1 - PlayerPrefs.GetInt("Infinite"))].CupSizeCap;
+	public int GetAllowedCustomerCount() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day") * (1 - PlayerPrefs.GetInt("Infinite"))].CustomerCount;
+	public List<CustomerOrder.CoffeeLayers> GetAllowedLayers() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day") * (1 - PlayerPrefs.GetInt("Infinite"))].AllowedLayers;
+	public List<CustomerOrder.Extras> GetAllowedExtras() => gameData.DAY_DATA[PlayerPrefs.GetInt("Day") * (1 - PlayerPrefs.GetInt("Infinite"))].AllowedExtras;
 }
 

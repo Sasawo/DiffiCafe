@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NotepadPager : MonoBehaviour
+public class NotepadPager : MonoBehaviour, IClickable
 {
     [SerializeField] int Increment;
     bool contains;
@@ -23,12 +23,12 @@ public class NotepadPager : MonoBehaviour
         return contained;
 	}
 
-	private void OnMouseDown()
-	{
-        NotepadOrders orders = GameObject.Find("Notepad").GetComponent<NotepadOrders>();
+    public void OnClick()
+    {
+		NotepadOrders orders = GameObject.Find("Notepad").GetComponent<NotepadOrders>();
 
 		orders.CurrentIndex += Increment;
-        orders.DisplayOrder();
+		orders.DisplayOrder();
 	}
 }
 

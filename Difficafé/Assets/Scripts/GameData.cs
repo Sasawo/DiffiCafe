@@ -22,7 +22,21 @@ public class GameData : ScriptableObject
 {
     public readonly DayData[] DAY_DATA =
     {
-        new DayData(2, 5,
+		new DayData(2, int.MaxValue,
+			new List<CustomerOrder.CoffeeLayers>
+			{
+				CustomerOrder.CoffeeLayers.COFFEE,
+				CustomerOrder.CoffeeLayers.MILK,
+				CustomerOrder.CoffeeLayers.W_MILK
+			},
+			new List<CustomerOrder.Extras>
+			{
+				CustomerOrder.Extras.SUGAR,
+				CustomerOrder.Extras.CINNAMON,
+				CustomerOrder.Extras.CREAM,
+				CustomerOrder.Extras.STRAW
+			}),
+		new DayData(2, 5,
             new List<CustomerOrder.CoffeeLayers>
             { 
                 CustomerOrder.CoffeeLayers.COFFEE 

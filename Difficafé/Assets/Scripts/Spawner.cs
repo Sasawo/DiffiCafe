@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : MonoBehaviour, IClickable
 {
     [SerializeField] GameObject toSpawn;
-	private void OnMouseDown()
+	public void OnClick()
 	{
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		GameObject spawned = Instantiate(toSpawn, new Vector3(mousePos.x, mousePos.y, 0), Quaternion.identity);

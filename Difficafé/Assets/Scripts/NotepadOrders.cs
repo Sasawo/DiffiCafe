@@ -49,8 +49,8 @@ public class NotepadOrders : MonoBehaviour
             return;
 		}
 
-        if (CurrentIndex >= Orders.Count) CurrentIndex -= 1;
-        else if (CurrentIndex < 0) CurrentIndex = 0;
+        if (CurrentIndex >= Orders.Count) CurrentIndex = 0;
+        else if (CurrentIndex < 0) CurrentIndex = Orders.Count - 1;
 
         CustomerOrder currentOrder = Orders[CurrentIndex];
 

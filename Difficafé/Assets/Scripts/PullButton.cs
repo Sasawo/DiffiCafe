@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PullButton : MonoBehaviour
+public class PullButton : MonoBehaviour, IClickable
 {
     [SerializeField] float PullDistance;
     [SerializeField] float ReturnSpeed;
@@ -41,7 +41,7 @@ public class PullButton : MonoBehaviour
 		}
     }
 
-	private void OnMouseDown()
+	public void OnClick()
 	{
         pulling = true;
         pressed = true;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RotateButton : MonoBehaviour
+public class RotateButton : MonoBehaviour, IClickable
 {
     [SerializeField] bool DirectionRight;
     [SerializeField] float DegreeBound;
@@ -62,7 +62,7 @@ public class RotateButton : MonoBehaviour
 		while (endAngle >= 360) endAngle -= 360;
 	}
 
-	private void OnMouseDown()
+	public void OnClick()
 	{
 		SetupAngles();
 		pressed = true;
