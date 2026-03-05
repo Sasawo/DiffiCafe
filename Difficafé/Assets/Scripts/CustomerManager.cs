@@ -31,8 +31,7 @@ public class CustomerManager : MonoBehaviour
 		if (finishedCount == MySingleton.Instance.GetAllowedCustomerCount() || (GetComponent<Endless>().enabled && GetComponent<Endless>().CheckTimer()))
         {
 			if (PlayerPrefs.GetInt("Infinite") == 0) SceneManager.LoadScene("EveScene");
-
-			if (PlayerPrefs.GetInt("InfiniteWin") == 0) SceneManager.LoadScene("MenuScene");
+			else if (PlayerPrefs.GetInt("InfiniteWin") == 0) SceneManager.LoadScene("MenuScene");
 			else SceneManager.LoadScene("InfiniteVictoryScene");
 
             return;

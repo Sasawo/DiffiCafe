@@ -75,6 +75,11 @@ public class Inventory : MonoBehaviour
 				gameObject.transform.position.x - Mathf.Abs(distanceMoved - movementDistance) * movementDirection, 
 				gameObject.transform.position.y);
 			distanceMoved = 0;
+
+			if (isRight && movementDirection == -1)
+				transform.position = GameObject.FindWithTag("MainCamera").transform.position + cameraDistanceVector;
+			else if (!isRight && movementDirection == 1)
+				transform.position = GameObject.FindWithTag("MainCamera").transform.position - cameraDistanceVector;
 		}
 	}
 
