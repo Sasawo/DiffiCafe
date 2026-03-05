@@ -14,7 +14,7 @@ public class DayScreen : MonoBehaviour
         AudioManager.Instance.StopSound();
         AudioManager.Instance.PlaySound(Resources.Load<AudioClip>("Audio/Impact"), false);
         timer = 0;
-        try { GameObject.Find("Daytext").GetComponent<TMP_Text>().text += "\n" + (PlayerPrefs.GetInt("Day") + 1); }
+        try { GameObject.Find("Daytext").GetComponent<TMP_Text>().text += "\n" + (PlayerPrefs.GetInt("Day")); }
         catch { }
     }
 
